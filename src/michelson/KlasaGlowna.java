@@ -16,6 +16,13 @@ public class KlasaGlowna extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	
+	JMenuBar pasek_menu;
+	JMenu menu;
+	JMenu grubosc_menu;
+	JMenuItem resize;
+	JMenuItem dzialanie;
+	JMenuItem dane;
+	
 	
 	
 	JPanel duzy;
@@ -52,6 +59,65 @@ public class KlasaGlowna extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		
+		
+		
+		
+		//Menu
+		
+				pasek_menu = new JMenuBar();
+				setJMenuBar(pasek_menu);
+				
+				menu = new JMenu("Witam");
+				pasek_menu.add(menu);
+				
+				resize = new JMenuItem("Ustaw losową wielkość okna");
+				dane = new JMenuItem("Dane twórców");
+				dzialanie = new JMenuItem("Jak działa program");
+				
+				resize.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						setSize((int)(Math.random()*500)+100,(int)(Math.random()*300)+100);
+					}
+				}
+				);
+				menu.add(resize);
+				
+			
+				
+				
+				
+				dane.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						JOptionPane.showMessageDialog(null,
+								"<html><center>Michał Prędota 305062<br>Kacper Kowerski 305028</center></html>","Dane",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				);
+				menu.add(dane);
+				
+				
+				
+				dzialanie.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						JOptionPane.showMessageDialog(null,
+								"Program działa tak i tak","Działanie programu",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				);
+				menu.add(dzialanie);
+				
+				
+
+				//Koniec menu
+		
+		
+		
+		
+		
+		
 		//Początek dużego panelu
 		
 		duzy = new JPanel();
@@ -78,13 +144,13 @@ public class KlasaGlowna extends JFrame {
 		
 		prawy_jezyk = new JButton("Kliknij aby zmienić język");
 		prawy_jezyk.setFont(new Font("Arial", Font.PLAIN, 15));
-		prawy_opis = new JButton("<html><center>Kliknij aby wyświetlić<br> krótki opis doświadczenia</center></html>");
+		prawy_opis = new JButton("<html><center>Kliknij, aby wyświetlić<br>krótki opis doświadczenia</center></html>");
 		prawy_opis.setFont(new Font("Arial", Font.PLAIN, 15));
-		prawy_kolor = new JButton("<html><center>Kliknij aby zmienić <br>kolor tła i/lub promienia</center></html>");
+		prawy_kolor = new JButton("<html><center>Kliknij, aby zmienić<br>kolor tła i/lub promienia</center></html>");
 		prawy_kolor.setFont(new Font("Arial", Font.PLAIN, 15));
-		prawy_eter = new JButton("<html><center>Kliknij aby <br>uwzględnić wiatr eteru</center></html>");
+		prawy_eter = new JButton("<html><center>Kliknij, aby uwzględnić<br>wiatr eteru</center></html>");
 		prawy_eter.setFont(new Font("Arial", Font.PLAIN, 15));
-		prawy_zamknij = new JButton("Kliknij aby zamknąć program");
+		prawy_zamknij = new JButton("Kliknij, aby zamknąć program");
 		prawy_zamknij.setFont(new Font("Arial", Font.PLAIN, 15));
 		
 		
@@ -251,6 +317,7 @@ public class KlasaGlowna extends JFrame {
 		KlasaGlowna frame = new KlasaGlowna();
 		frame.setVisible(true);
 		frame.setSize(1280,960);
+		frame.setMinimumSize(new Dimension(960,600));
 	}
 
 }
