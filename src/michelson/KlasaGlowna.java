@@ -15,7 +15,7 @@ public class KlasaGlowna extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
+	String s="cokolwiek";
 	JMenuBar pasek_menu;
 	JMenu menu;
 	JMenu grubosc_menu;
