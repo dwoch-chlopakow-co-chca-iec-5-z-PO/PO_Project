@@ -61,6 +61,11 @@ public class KlasaGlowna extends JFrame {
 	
 	public KlasaGlowna() throws HeadlessException {
 		
+		
+		
+	
+		
+		
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
@@ -105,10 +110,28 @@ public class KlasaGlowna extends JFrame {
 				
 				
 				
+				
+				
+				
 				dzialanie.addActionListener(new ActionListener() {
 					@Override
-					public void actionPerformed(ActionEvent arg0) {						
-						URL obraz = getClass().getResource("grafiki/GUI-instrukcja.png");
+					public void actionPerformed(ActionEvent arg0) {		
+					
+						
+						
+						ObrazekRamka ramka = new ObrazekRamka();
+						ramka.setVisible(true);
+					
+						
+						
+						
+						
+						
+						
+						
+						
+						/*
+						URL obraz = getClass().getResource("paczka_testowa/dooch.png");
 						
 						try {
 							 image = ImageIO.read(obraz);
@@ -119,12 +142,12 @@ public class KlasaGlowna extends JFrame {
 						Dimension dimension = new Dimension(image.getWidth(), image.getHeight());
 						setPreferredSize(dimension);
 						
-			/*			@Override
+						@Override
 			            protected void paintComponent(Graphics g) {
 			                super.paintComponent(g);
 			                g.drawImage(image, 0, 0, null);
-			            } */
-						
+			            } 
+						*/
 					}
 				}
 				);
@@ -278,7 +301,7 @@ public class KlasaGlowna extends JFrame {
 		
 		
 		
-		//Pocz�tek dolnego panelu
+		//Początek dolnego panelu
 		
 		dolny = new JPanel();
 		add(dolny, BorderLayout.SOUTH);
@@ -338,7 +361,7 @@ public class KlasaGlowna extends JFrame {
 	public static void main(String[] args) {
 		KlasaGlowna frame = new KlasaGlowna();
 		frame.setVisible(true);
-		frame.setSize(1280,960);
+		frame.setSize(1080,760);
 		frame.setMinimumSize(new Dimension(960,600));
 	}
 

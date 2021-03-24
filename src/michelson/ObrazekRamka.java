@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class ObrazekRamka extends JFrame {
 
 	public ObrazekRamka() throws HeadlessException {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		ObrazekPanel obrazek = new ObrazekPanel();
 		setSize(obrazek.getPreferredSize());
