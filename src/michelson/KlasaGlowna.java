@@ -2,9 +2,14 @@ package michelson;
 
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class KlasaGlowna extends JFrame {
@@ -52,6 +57,8 @@ public class KlasaGlowna extends JFrame {
 	static final int obrot_init = 0;
 	
 	int czy_wiatr = 0;
+
+	private BufferedImage image;
 	
 	public KlasaGlowna() throws HeadlessException {
 		
@@ -101,12 +108,28 @@ public class KlasaGlowna extends JFrame {
 				
 				dzialanie.addActionListener(new ActionListener() {
 					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						JOptionPane.showMessageDialog(null,
-								"Program działa tak i tak","Działanie programu",JOptionPane.INFORMATION_MESSAGE);
+					public void actionPerformed(ActionEvent arg0) {						
+						URL obraz = getClass().getResource("grafiki/GUI-instrukcja.png");
+						
+						try {
+							 image = ImageIO.read(obraz);
+							 } catch (IOException e) {
+							 System.err.println("Blad odczytu obrazka");
+							 e.printStackTrace();
+							 }
+						Dimension dimension = new Dimension(image.getWidth(), image.getHeight());
+						setPreferredSize(dimension);
+						
+			/*			@Override
+			            protected void paintComponent(Graphics g) {
+			                super.paintComponent(g);
+			                g.drawImage(image, 0, 0, null);
+			            } */
+						
 					}
 				}
 				);
+				
 				menu.add(dzialanie);
 				
 				
