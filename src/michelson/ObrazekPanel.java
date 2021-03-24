@@ -18,7 +18,7 @@ public class ObrazekPanel extends JPanel {
         super();
         
         // Plik umieszczony w podpakiecie "obrazki"
-        URL resource = getClass().getResource("obrazki/zdjecie1.jpg");        
+        URL resource = getClass().getResource("obrazki/gorilla.jpg");        
         try {
             image = ImageIO.read(resource);
         } catch (IOException e) {

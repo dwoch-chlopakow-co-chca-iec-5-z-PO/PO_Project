@@ -16,10 +16,6 @@ public class ObrazekRamka extends JFrame {
 	}
 
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ObrazekRamka okno = new ObrazekRamka();
-		okno.setVisible(true);
-	}
+	
 
 }
