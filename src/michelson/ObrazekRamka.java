@@ -13,7 +13,7 @@ public class ObrazekRamka extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	public ObrazekRamka() throws HeadlessException {
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new FlowLayout());
 		ObrazekPanel obrazek = new ObrazekPanel();
 		setSize(obrazek.getPreferredSize());
