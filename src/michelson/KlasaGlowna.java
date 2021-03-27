@@ -2,14 +2,10 @@ package michelson;
 
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.net.URL;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class KlasaGlowna extends JFrame {
@@ -57,7 +53,6 @@ public class KlasaGlowna extends JFrame {
 	
 	int czy_wiatr = 0;
 
-	private BufferedImage image;
 	
 	public KlasaGlowna() throws HeadlessException {
 		

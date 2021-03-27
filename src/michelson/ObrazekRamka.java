@@ -7,6 +7,11 @@ import javax.swing.JFrame;
 
 public class ObrazekRamka extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ObrazekRamka() throws HeadlessException {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
