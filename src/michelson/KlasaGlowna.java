@@ -113,24 +113,7 @@ public class KlasaGlowna extends JFrame {
 						
 					
 						
-						/*
-						URL obraz = getClass().getResource("paczka_testowa/dooch.png");
 						
-						try {
-							 image = ImageIO.read(obraz);
-							 } catch (IOException e) {
-							 System.err.println("Blad odczytu obrazka");
-							 e.printStackTrace();
-							 }
-						Dimension dimension = new Dimension(image.getWidth(), image.getHeight());
-						setPreferredSize(dimension);
-						
-						@Override
-			            protected void paintComponent(Graphics g) {
-			                super.paintComponent(g);
-			                g.drawImage(image, 0, 0, null);
-			            } 
-						*/
 					}
 				}
 				);
