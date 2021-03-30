@@ -19,7 +19,7 @@ public class ObrazekPanel extends JPanel {
  
     public ObrazekPanel() {
         
-        // Plik umieszczony w podpakiecie "obrazki"
+       
         URL resource = getClass().getResource("obrazki/GUI-instrukcja.png");        
         try {
             image = ImageIO.read(resource);
@@ -37,7 +37,7 @@ public class ObrazekPanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(image, 0, 0, this);
        
-        // SKALOWANIE WKLEJANEGO OBRAZKA:
-        //g2d.drawImage(image, 50, 50, image.getWidth()/3, image.getHeight()/3, this);
+        
+       // g2d.drawImage(image, 50, 50, image.getWidth()/3, image.getHeight()/3, this);
     }
 }
