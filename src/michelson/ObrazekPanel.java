@@ -18,7 +18,6 @@ public class ObrazekPanel extends JPanel {
 	private BufferedImage image;
  
     public ObrazekPanel() {
-        super();
         
         // Plik umieszczony w podpakiecie "obrazki"
         URL resource = getClass().getResource("obrazki/GUI-instrukcja.png");        

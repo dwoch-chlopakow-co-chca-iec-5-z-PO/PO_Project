@@ -76,18 +76,11 @@ public class KlasaGlowna extends JFrame {
 				menu = new JMenu("Witam");
 				pasek_menu.add(menu);
 				
-				resize = new JMenuItem("Ustaw losową wielkość okna");
+				
 				dane = new JMenuItem("Dane twórców");
 				dzialanie = new JMenuItem("Jak działa program");
 				
-				resize.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						setSize((int)(Math.random()*500)+100,(int)(Math.random()*300)+100);
-					}
-				}
-				);
-				menu.add(resize);
+				
 				
 			
 				
@@ -118,12 +111,7 @@ public class KlasaGlowna extends JFrame {
 						ramka.setVisible(true);
 					
 						
-						
-						
-						
-						
-						
-						
+					
 						
 						/*
 						URL obraz = getClass().getResource("paczka_testowa/dooch.png");
