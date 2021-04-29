@@ -1,12 +1,17 @@
 package michelson;
 
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javax.swing.*;
+
+import testy.PanelArrow;
 
 public class KlasaGlowna extends JFrame {
 
@@ -15,6 +20,9 @@ public class KlasaGlowna extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	final ScheduledExecutorService scheduler = 
+		       Executors.newScheduledThreadPool(1);
 	
 	JMenuBar pasek_menu;
 	JMenu menu;
@@ -25,7 +33,7 @@ public class KlasaGlowna extends JFrame {
 	
 	
 	
-	JPanel duzy;
+	ArrowsPanel duzy;
 	JPanel prawy;
 	JPanel dolny;
 	
@@ -62,7 +70,7 @@ public class KlasaGlowna extends JFrame {
 		
 		
 		setLayout(new BorderLayout());
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		
 		
@@ -116,33 +124,6 @@ public class KlasaGlowna extends JFrame {
 						
 						ObrazekRamka ramka = new ObrazekRamka();
 						ramka.setVisible(true);
-					
-						
-						
-						
-						
-						
-						
-						
-						
-						/*
-						URL obraz = getClass().getResource("paczka_testowa/dooch.png");
-						
-						try {
-							 image = ImageIO.read(obraz);
-							 } catch (IOException e) {
-							 System.err.println("Blad odczytu obrazka");
-							 e.printStackTrace();
-							 }
-						Dimension dimension = new Dimension(image.getWidth(), image.getHeight());
-						setPreferredSize(dimension);
-						
-						@Override
-			            protected void paintComponent(Graphics g) {
-			                super.paintComponent(g);
-			                g.drawImage(image, 0, 0, null);
-			            } 
-						*/
 					}
 				}
 				);
@@ -160,9 +141,15 @@ public class KlasaGlowna extends JFrame {
 		
 		//Początek dużego panelu
 		
-		duzy = new JPanel();
-		add(duzy, BorderLayout.CENTER);
-		duzy.setBackground(Color.white);
+		duzy = new ArrowsPanel();
+		
+		for (int i = 0; i < 1000; i++)
+			duzy.addArrow();
+		add(duzy);
+		duzy.setBackground(Color.black);
+		
+		scheduler.scheduleWithFixedDelay(duzy, 0, 5, MILLISECONDS);
+
 		
 		//Koniec dużego panelu
 		
@@ -354,10 +341,23 @@ public class KlasaGlowna extends JFrame {
 	
 
 	public static void main(String[] args) {
-		KlasaGlowna frame = new KlasaGlowna();
-		frame.setVisible(true);
-		frame.setSize(1080,760);
-		frame.setMinimumSize(new Dimension(960,600));
+		
+		
+		
+		
+		 SwingUtilities.invokeLater(new Runnable() {
+	            @Override
+	            public void run() {
+
+	            	KlasaGlowna frame = new KlasaGlowna();
+	        		frame.setVisible(true);
+	        		frame.setSize(1080,760);
+	        		frame.setMinimumSize(new Dimension(960,600));
+	            }
+		 });
+		 
+		 
+		
 	}
 
 }
