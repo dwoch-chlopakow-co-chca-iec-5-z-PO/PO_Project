@@ -14,7 +14,7 @@ public class Arrow {
 	int[] x1 = {x[1] - width/2, x[1] + width/2, x[1] + width/2, x[1] - width/2};
 	int[] y1 = {y[0]		  , y[0]		  , y[2] + (y[2] - y[1])     , y[2] + (y[2] - y[1])};
 	
-	private Color color = new Color(154, 227, 192);
+	private Color color = new Color(154, 227, 192, 100);
 	private int []vX = {1, 1, 1, 1};
 	private int []vY = {1, 1, 1, 1};
 	
@@ -86,8 +86,7 @@ public class Arrow {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
-	
+
 	
 	
 

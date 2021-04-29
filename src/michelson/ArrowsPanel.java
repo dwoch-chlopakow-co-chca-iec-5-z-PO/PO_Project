@@ -21,8 +21,8 @@ public class ArrowsPanel extends JPanel implements Runnable{
 
 	private int x = 0, y = 40;
 	
-	private int[] xV = {0, 0, 0};
-	private int[] yV = {0, 0, 0};
+	private int[] xV = {0, 0, 0, 0};
+	private int[] yV = {0, 0, 0, 0};
 	private boolean zero = true;
 	
 	
@@ -53,7 +53,7 @@ public class ArrowsPanel extends JPanel implements Runnable{
 
 		
 	//	p.setvX(xV);
-	//	p.setvY(yV);
+		p.setvY(yV);
 	//	p.setColor(col1);
 		
 		arrows.add(p);	
@@ -87,11 +87,11 @@ public class ArrowsPanel extends JPanel implements Runnable{
 		for (Arrow ar : arrows) {
 			
 				
-				ar.setYts(sub(ar.getYts(), ar.getvY()));
-				ar.setYrs(sub(ar.getYrs(), ar.getvY()));
+				ar.setYts(sub(ar.getYts(), yV));
+				ar.setYrs(sub(ar.getYrs(), yV));
 
 				
-				if((ar.getYts()[1] + h + ar.getHeight()) == 0) {
+				if((ar.getYts()[1] + h + ar.getHeight()) <= 0) {
 					ar.setYts(addnum(ar.getYts()));
 					ar.setYrs(addnum(ar.getYrs()));
 				}
@@ -127,5 +127,10 @@ public class ArrowsPanel extends JPanel implements Runnable{
 			ret[i] = x1[i] - x2[i];
 			
 		return ret;
+	}
+	
+	void setyV(int a) {
+		int[] yv = {a, a, a, a};
+		yV = yv;
 	}
 }

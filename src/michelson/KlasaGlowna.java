@@ -10,6 +10,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import testy.PanelArrow;
 
@@ -60,6 +62,7 @@ public class KlasaGlowna extends JFrame {
 	static final int obrot_init = 0;
 	
 	int czy_wiatr = 0;
+	
 
 	
 	public KlasaGlowna() throws HeadlessException {
@@ -143,9 +146,10 @@ public class KlasaGlowna extends JFrame {
 		
 		duzy = new ArrowsPanel();
 		
-		for (int i = 0; i < 200; i++)
+		for (int i = 0; i < 138; i++)
 			duzy.addArrow();
 		add(duzy);
+		duzy.setVisible(false);
 		duzy.setBackground(Color.black);
 		
 		scheduler.scheduleWithFixedDelay(duzy, 0, 5, MILLISECONDS);
@@ -233,12 +237,13 @@ public class KlasaGlowna extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(czy_wiatr == 0)
 				{
-					czy_wiatr=1;//zmieniamy zmienną dotyczącą występowania wiatru eteru
+					czy_wiatr = 1;//zmieniamy zmienną dotyczącą występowania wiatru eteru
 					prawy_eter.setText("<html><center>Wybrano opcje <br>uwzględniania wiatru eteru</center></html>");
 					predkosc.setVisible(true);//widoczne elementy związane ze sliderami
 					Obrot.setVisible(true);
 					tytul1.setVisible(true);
 					tytul2.setVisible(true);
+					duzy.setVisible(true);
 					revalidate();
 				}
 				else
@@ -249,6 +254,7 @@ public class KlasaGlowna extends JFrame {
 					Obrot.setVisible(false);
 					tytul1.setVisible(false);
 					tytul2.setVisible(false);
+					duzy.setVisible(false);
 					revalidate();
 				}
 			}
@@ -308,6 +314,20 @@ public class KlasaGlowna extends JFrame {
 		slidery.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 	
 		predkosc = new JSlider(JSlider.HORIZONTAL, predkosc_min, predkosc_max, predkosc_init);//do dodania listener
+		
+		predkosc.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				duzy.setyV(predkosc.getValue());
+			}
+			
+		});
+		
+		
+		
+		
+		
 		Obrot = new JSlider(JSlider.HORIZONTAL, obrot_min, obrot_max, obrot_init);//dod dodania listener
 		tytul1 = new JLabel("Prędkość wiatru eteru (w kilometrach na sekundę)");
 		tytul2 = new JLabel("Obrót stolika (w stopniach)");
