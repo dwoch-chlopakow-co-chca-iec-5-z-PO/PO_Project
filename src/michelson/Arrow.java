@@ -1,12 +1,12 @@
 package michelson;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-
 
 public class Arrow {
 	
 	private int width = 2;
+	
+	
 	
 	int[] x = {74, 100, 126};
 	int[] y = {195, 150, 195};

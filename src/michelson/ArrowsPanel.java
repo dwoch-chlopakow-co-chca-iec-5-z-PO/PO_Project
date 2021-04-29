@@ -2,9 +2,13 @@ package michelson;
 
 
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import javax.swing.JPanel;
 
 
@@ -14,24 +18,25 @@ public class ArrowsPanel extends JPanel implements Runnable{
 	List<Arrow> arrows = new ArrayList<Arrow>();
 	
 
-	private int a = 10;
-	private int h = (int)(a * Math.sqrt(3) / 2);
+	private int a = 11;
+	private int h = (int)(a * Math.sqrt(3) / 2) + 1;
 	private int w = 2;
 	
 
-	private int x = 0, y = 40;
+	private int x = -240, y = 40;
 	
-	private int[] xV = {0, 0, 0, 0};
 	private int[] yV = {0, 0, 0, 0};
 	private boolean zero = true;
+	
+	double k;
 	
 	
 	public void addArrow(){
 			
 		
-	
+	Random r = new Random();
 		
-	//	Color col1 = new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
+		Color col1 = new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
 		
 		
 		
@@ -52,9 +57,8 @@ public class ArrowsPanel extends JPanel implements Runnable{
 		
 
 		
-	//	p.setvX(xV);
 		p.setvY(yV);
-	//	p.setColor(col1);
+		p.setColor(col1);
 		
 		arrows.add(p);	
 		
@@ -70,34 +74,34 @@ public class ArrowsPanel extends JPanel implements Runnable{
 				x = 0;
 				zero = true;
 			}
-			y = y + 50;
+			y = y + 60;
 			
 		}
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-	
+		
+		Graphics2D g2d = (Graphics2D) g;
+		
+		g2d.rotate(Math.toRadians(k), 850/2, 500/2);
+		
 		for (Arrow pr : arrows)
-			pr.paint(g);
+			pr.paint(g2d);
 	}
 	
 	@Override
 	public void run() {
 		for (Arrow ar : arrows) {
-			
 				
 				ar.setYts(sub(ar.getYts(), yV));
 				ar.setYrs(sub(ar.getYrs(), yV));
 
 				
-				if((ar.getYts()[1] + h + ar.getHeight()) <= 0) {
+				if((ar.getYts()[1] + h + ar.getHeight()) <= -240) {
 					ar.setYts(addnum(ar.getYts()));
 					ar.setYrs(addnum(ar.getYrs()));
 				}
-				
-				
-	
 		}
 		repaint();
 	}
@@ -111,16 +115,16 @@ public class ArrowsPanel extends JPanel implements Runnable{
 		return ret;
 	}
 		
-	int[] addnum(int []y1){
+	int[] addnum(int[] y1){
 		int[] ret = new int[y1.length];
 			
 		for(int i = 0; i < y1.length; i++)
-			ret[i] = y1[i] + 600;
+			ret[i] = y1[i] + 1200;
 			
 		return ret;
 	}
 		
-	int[] sub(int []x1, int []x2){
+	int[] sub(int[] x1, int[] x2){
 		int[] ret = new int[x1.length];
 			
 		for(int i = 0; i<x1.length; i++)
@@ -132,5 +136,9 @@ public class ArrowsPanel extends JPanel implements Runnable{
 	void setyV(int a) {
 		int[] yv = {a, a, a, a};
 		yV = yv;
+	}
+	
+	void setk(double k) {
+		this.k = k;
 	}
 }

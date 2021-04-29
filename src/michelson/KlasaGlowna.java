@@ -13,8 +13,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import testy.PanelArrow;
-
 public class KlasaGlowna extends JFrame {
 
 	
@@ -35,7 +33,7 @@ public class KlasaGlowna extends JFrame {
 	
 	
 	
-	ArrowsPanel duzy;
+	static ArrowsPanel duzy;
 	JPanel prawy;
 	JPanel dolny;
 	
@@ -49,16 +47,16 @@ public class KlasaGlowna extends JFrame {
 	JLabel tytul1;
 	JLabel tytul2;
 	JSlider predkosc;
-	JSlider Obrot;
+	JSlider obrot;
 	
 	Color kolor;
 	
 	static final int predkosc_min = 0;
-	static final int predkosc_max = 100;
+	static final int predkosc_max = 10;
 	static final int predkosc_init = 0;
 	
-	static final int obrot_min = 0;
-	static final int obrot_max = 360;
+	static final int obrot_min = -180;
+	static final int obrot_max = 180;
 	static final int obrot_init = 0;
 	
 	int czy_wiatr = 0;
@@ -146,11 +144,13 @@ public class KlasaGlowna extends JFrame {
 		
 		duzy = new ArrowsPanel();
 		
-		for (int i = 0; i < 138; i++)
+		for (int i = 0; i < 230; i++)
 			duzy.addArrow();
 		add(duzy);
 		duzy.setVisible(false);
 		duzy.setBackground(Color.black);
+		
+		
 		
 		scheduler.scheduleWithFixedDelay(duzy, 0, 5, MILLISECONDS);
 
@@ -240,7 +240,7 @@ public class KlasaGlowna extends JFrame {
 					czy_wiatr = 1;//zmieniamy zmienną dotyczącą występowania wiatru eteru
 					prawy_eter.setText("<html><center>Wybrano opcje <br>uwzględniania wiatru eteru</center></html>");
 					predkosc.setVisible(true);//widoczne elementy związane ze sliderami
-					Obrot.setVisible(true);
+					obrot.setVisible(true);
 					tytul1.setVisible(true);
 					tytul2.setVisible(true);
 					duzy.setVisible(true);
@@ -251,7 +251,7 @@ public class KlasaGlowna extends JFrame {
 					czy_wiatr=0;
 					prawy_eter.setText("<html><center>Wybrano opcje <br>nie uwzględniania wiatru eteru</center></html>");
 					predkosc.setVisible(false);//niewidoczne elementy związane ze sliderami
-					Obrot.setVisible(false);
+					obrot.setVisible(false);
 					tytul1.setVisible(false);
 					tytul2.setVisible(false);
 					duzy.setVisible(false);
@@ -328,29 +328,42 @@ public class KlasaGlowna extends JFrame {
 		
 		
 		
-		Obrot = new JSlider(JSlider.HORIZONTAL, obrot_min, obrot_max, obrot_init);//dod dodania listener
+		obrot = new JSlider(JSlider.HORIZONTAL, obrot_min, obrot_max, obrot_init);//dod dodania listener
+		
+		obrot.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				duzy.setk(obrot.getValue());
+			}
+			
+		});
+		
+		
+		
+		
 		tytul1 = new JLabel("Prędkość wiatru eteru (w kilometrach na sekundę)");
 		tytul2 = new JLabel("Obrót stolika (w stopniach)");
 		
 		predkosc.setVisible(false);
-		Obrot.setVisible(false);
+		obrot.setVisible(false);
 		tytul1.setVisible(false);
 		tytul2.setVisible(false);
 		
 		slidery.add(tytul1);
 		slidery.add(predkosc);
 		slidery.add(tytul2);
-		slidery.add(Obrot);
+		slidery.add(obrot);
 		
-		predkosc.setMajorTickSpacing(10);//dodanie upiększeń do slidera
-		predkosc.setMinorTickSpacing(5);
+		predkosc.setMajorTickSpacing(2);//dodanie upiększeń do slidera
+		predkosc.setMinorTickSpacing(1);
 		predkosc.setPaintTicks(true);
 		predkosc.setPaintLabels(true);
 		
-		Obrot.setMajorTickSpacing(90);//dodanie upiększeń do slidera
-		Obrot.setMinorTickSpacing(45);
-		Obrot.setPaintTicks(true);
-		Obrot.setPaintLabels(true);
+		obrot.setMajorTickSpacing(90);//dodanie upiększeń do slidera
+		obrot.setMinorTickSpacing(45);
+		obrot.setPaintTicks(true);
+		obrot.setPaintLabels(true);
 		
 		
 		dolny.add(na_start);
@@ -373,6 +386,7 @@ public class KlasaGlowna extends JFrame {
 	        		frame.setVisible(true);
 	        		frame.setSize(1080,760);
 	        		frame.setMinimumSize(new Dimension(960,600));
+	        		
 	            }
 		 });
 		 
