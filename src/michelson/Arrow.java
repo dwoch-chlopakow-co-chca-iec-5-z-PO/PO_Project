@@ -6,30 +6,54 @@ import java.awt.geom.AffineTransform;
 
 public class Arrow {
 	
-	int[] x = {74,100,126};
-	int[] y = {195,150,195};
-	private Color color = new Color(154, 227, 192, 50);
-	private int []vX = {1, 1, 1};
-	private int []vY = {1, 1, 1};
 	private int width = 2;
 	
+	int[] x = {74, 100, 126};
+	int[] y = {195, 150, 195};
+	
+	int[] x1 = {x[1] - width/2, x[1] + width/2, x[1] + width/2, x[1] - width/2};
+	int[] y1 = {y[0]		  , y[0]		  , y[2] + (y[2] - y[1])     , y[2] + (y[2] - y[1])};
+	
+	private Color color = new Color(154, 227, 192);
+	private int []vX = {1, 1, 1, 1};
+	private int []vY = {1, 1, 1, 1};
 	
 	
 	
-	public void setXs(int[] x) {
+	
+	
+	public void setXts(int[] x) {
 		this.x = x;
 	}
 	    
-	public void setYs(int[] y) {
+	public void setYts(int[] y) {
 		this.y = y;
 	}
 	
-	public int[] getXs() {
+	public int[] getXts() {
 		return x;
 	}
 	    
-	public int[] getYs() {
+	public int[] getYts() {
 		return y;
+	}
+	
+	
+	
+	public void setXrs(int[] x1) {
+		this.x1 = x1;
+	}
+	    
+	public void setYrs(int[] y1) {
+		this.y1 = y1;
+	}
+	
+	public int[] getXrs() {
+		return x1;
+	}
+	    
+	public int[] getYrs() {
+		return y1;
 	}
 	
 	
@@ -70,6 +94,7 @@ public class Arrow {
 	public void paint(Graphics g){
 		g.setColor(color);
 		g.fillPolygon(x, y, 3);
-		g.fillRect(x[0] + (x[2] - x[1])-width/2, y[2], width, y[2]-y[1]);
+	//	g.fillRect(x[0] + (x[2] - x[1])-width/2, y[2], width, y[2]-y[1]);
+		g.fillPolygon(x1, y1, 4);
     }
 }

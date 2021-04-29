@@ -13,15 +13,17 @@ public class ArrowsPanel extends JPanel implements Runnable{
 	
 	List<Arrow> arrows = new ArrayList<Arrow>();
 	
-	int i = 0;
 
-	private int h = 10;
+	private int a = 10;
+	private int h = (int)(a * Math.sqrt(3) / 2);
+	private int w = 2;
+	
 
-	private int a = (int)(2 * h / Math.sqrt(3));
 	private int x = 0, y = 40;
 	
 	private int[] xV = {0, 0, 0};
 	private int[] yV = {0, 0, 0};
+	private boolean zero = true;
 	
 	
 	public void addArrow(){
@@ -34,13 +36,18 @@ public class ArrowsPanel extends JPanel implements Runnable{
 		
 		
 
-		int[] xs = {x , x + (int)(a/2), x + a};
-		int[] ys = {y + h, y, y + h};
+		int[] xt = {x , x + (int)(a/2), x + a};
+		int[] yt = {y + h, y, y + h};
+		
+		int[] xr = {xt[1] - w/2, xt[1] + w/2 + 1, xt[1] + w/2 + 1                 , xt[1] - w/2};
+		int[] yr = {yt[0]      , yt[0]	    , yt[2] + (yt[2] - yt[1])     , yt[2] + (yt[2] - yt[1])};
 		
 		
 		Arrow p = new Arrow();
-		p.setXs(xs);
-		p.setYs(ys);
+		p.setXts(xt);
+		p.setYts(yt);
+		p.setXrs(xr);
+		p.setYrs(yr);
 
 		
 
@@ -51,12 +58,20 @@ public class ArrowsPanel extends JPanel implements Runnable{
 		
 		arrows.add(p);	
 		
-		x += 40;
+		x += 80;
 		
 		
-		if(xs[2] >= 840) {
-			x = 0;
+		if(xt[2] >= 840) {
+			if(zero == true) {
+				x = 40;
+				zero = false;
+			}
+			else {
+				x = 0;
+				zero = true;
+			}
 			y = y + 50;
+			
 		}
 	}
 
@@ -69,20 +84,28 @@ public class ArrowsPanel extends JPanel implements Runnable{
 	
 	@Override
 	public void run() {
-		for (Arrow pr : arrows) {
-				pr.setYs(subtract(pr.getYs(), pr.getvY()));
+		for (Arrow ar : arrows) {
 			
-				if((pr.getYs()[1] + h + pr.getHeight()) == 0)
-					pr.setYs(addnum(pr.getYs()));
+				
+				ar.setYts(sub(ar.getYts(), ar.getvY()));
+				ar.setYrs(sub(ar.getYrs(), ar.getvY()));
+
+				
+				if((ar.getYts()[1] + h + ar.getHeight()) == 0) {
+					ar.setYts(addnum(ar.getYts()));
+					ar.setYrs(addnum(ar.getYrs()));
+				}
+				
+				
+	
 		}
-		
 		repaint();
 	}
 	
 	int[] add(int []x1, int []x2){
 		int[] ret = new int[x1.length];
 			
-		for(int i = 0; i<x1.length; i++)
+		for(int i = 0; i < x1.length; i++)
 			ret[i] = x1[i] + x2[i];
 			
 		return ret;
@@ -92,12 +115,12 @@ public class ArrowsPanel extends JPanel implements Runnable{
 		int[] ret = new int[y1.length];
 			
 		for(int i = 0; i < y1.length; i++)
-			ret[i] = y1[i] + 500;
+			ret[i] = y1[i] + 600;
 			
 		return ret;
 	}
 		
-	int[] subtract(int []x1, int []x2){
+	int[] sub(int []x1, int []x2){
 		int[] ret = new int[x1.length];
 			
 		for(int i = 0; i<x1.length; i++)

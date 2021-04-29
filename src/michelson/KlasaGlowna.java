@@ -1,7 +1,7 @@
 package michelson;
 
 
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -143,7 +143,7 @@ public class KlasaGlowna extends JFrame {
 		
 		duzy = new ArrowsPanel();
 		
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 200; i++)
 			duzy.addArrow();
 		add(duzy);
 		duzy.setBackground(Color.black);
