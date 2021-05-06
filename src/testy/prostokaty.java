@@ -11,6 +11,7 @@ public class prostokaty extends JPanel implements Runnable
 	prostokat pocz, pion;
 	boolean active = true;
 	int pauza;
+	int v0 = 10;
 	
 	public void setActive(boolean b)
 	{
@@ -33,6 +34,12 @@ public class prostokaty extends JPanel implements Runnable
 	{
 		p.setvx(-p.getvx());
 		p.setvy(-p.getvy());
+	}
+	
+	public void modV(int k, int v)
+	{
+		pocz.setvx(v0+(int)(v*Math.cos(Math.toRadians(k))));
+		pocz.setvy(v0+(int)(v*Math.sin(Math.toRadians(k))));
 	}
 	
 	public void flip(prostokat p, int k)
@@ -106,14 +113,14 @@ public class prostokaty extends JPanel implements Runnable
 	{
 		int height = getSize().height;
 		int width = getSize().width;
-		int center = getSize().width/2;
+		int center = width/2;
 		
 		pocz = new prostokat();
 		pion = new prostokat();
 		
 		pocz.setX(0);
 		pocz.setY(height/2);
-		pocz.setvx(10);
+		pocz.setvx(v0);
 		pocz.setvy(0);
 		pocz.setWidth(20);
 		pocz.setHeight(5);
@@ -122,7 +129,7 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setX(width/2);
 		pion.setY(height/2+10);
 		pion.setvx(0);
-		pion.setvy(10);
+		pion.setvy(v0);
 		pion.setWidth(5);
 		pion.setHeight(20);
 		pion.setColor(Color.BLACK);
