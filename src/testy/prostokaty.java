@@ -137,22 +137,24 @@ public class prostokaty extends JPanel implements Runnable
 			
 			if(pocz.getX()+pocz.getWidth()>=center)//aktywacja po przekroczeniu środka przez laser początkowy
 			{
-				if(pocz.getX()+pocz.getWidth()<=width)//przemieszczamy laser początkowy do kontaktu z prawą ścianką
+				if(pocz.getX()+pocz.getWidth()<=center+height/2)//przemieszczamy laser początkowy do kontaktu z prawą ścianką
 				{
 					pocz.setX(pocz.getX()+pocz.getvx());
 					repaint();
 				}	
 				
-				if(pocz.getX()+pocz.getWidth()>=width)//odbijamy początkowy laser od ścianki
+				if(pocz.getX()+pocz.getWidth()>=center+height/2)//odbijamy początkowy laser od ścianki
 				{
 					odbij(pocz);
 					pocz.setX(pocz.getX()+pocz.getvx());
 					repaint();
+					
 				}
 				
 				if(pocz.getX()<center && pocz.getvx()<0)//zmieniamy kierunek początkowego laser na pionowy i w dół
 				{
 					flip(pocz, -90);
+					pocz.setY(pocz.getY()-20);
 					pocz.setvy(pocz.getvx());
 					pocz.setvx(0);
 					pocz.setY(pocz.getY()-pocz.getvy());
@@ -163,6 +165,7 @@ public class prostokaty extends JPanel implements Runnable
 				{
 					pocz.setY(pocz.getY()+pocz.getvy());
 					repaint();
+					System.out.println("poziom: "+pocz.getY());
 				}
 				
 				if(pocz.getY()+pocz.getHeight()>=height)
@@ -175,7 +178,7 @@ public class prostokaty extends JPanel implements Runnable
 				{
 					pion.setY(pion.getY()-pion.getvy());
 					repaint();
-					System.out.println(pion.getY());
+					System.out.println("pion: "+pion.getY());
 				}
 			
 				if(pion.getY()<=0) //odbicie lasera na górnej ściance
@@ -183,7 +186,6 @@ public class prostokaty extends JPanel implements Runnable
 					odbij(pion);
 					pion.setY(pion.getY()-pion.getvy());
 					repaint();
-					System.out.println(pion.getY());
 				}
 				
 				if(pion.getY()+pion.getHeight()+9>=height)//zatrzymanie lasera na dolnej krawędzi
