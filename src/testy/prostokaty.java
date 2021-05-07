@@ -145,7 +145,8 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setvy(vy);
 		pion.setWidth(10);
 		pion.setHeight(40);
-		pion.setColor(Color.BLACK);
+		
+		pion.setColor(Color.white);
 		
 		while(active)
 		{
@@ -157,6 +158,8 @@ public class prostokaty extends JPanel implements Runnable
 			
 			if(pocz.getX()+pocz.getWidth()>=center)//aktywacja po przekroczeniu środka przez laser początkowy
 			{
+				pion.setColor(Color.BLACK);
+				
 				if(pocz.getX()+pocz.getWidth()<=center+height/2)//przemieszczamy laser początkowy do kontaktu z prawą ścianką
 				{
 					pocz.setX(pocz.getX()+pocz.getvx());
