@@ -26,7 +26,7 @@ public class stolik extends JFrame
     	panel.setBackground(Color.white);
     	frame.add(panel);
     	frame.setVisible(true);
-    	panel.modV(180, 1);
+    	panel.modV(90, 2);
     	
     	ExecutorService exec = Executors.newFixedThreadPool(1);
     	exec.execute(panel);

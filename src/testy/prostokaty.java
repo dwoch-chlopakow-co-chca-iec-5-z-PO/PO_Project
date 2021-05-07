@@ -2,6 +2,7 @@ package testy;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -18,8 +19,6 @@ public class prostokaty extends JPanel implements Runnable
 	{
 		active = b;
 	}
-	
-	
 
 	prostokaty()
 	{
@@ -108,6 +107,18 @@ public class prostokaty extends JPanel implements Runnable
 		super.paintComponent(g);
 		pocz.paint(g);
 		pion.paint(g);
+		
+		g.setColor(Color.blue);
+		g.fillRect(0, getSize().height/2-5, 80, 10);//emiter
+		g.setColor(new Color(179, 204, 255));
+		g.fillRect(getSize().width/2-35, 0, 80, 10);//lustro na górze
+		g.fillRect(getSize().width/2+getSize().height/2, getSize().height/2-35, 20, 80);//lustro z prawej
+		
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setColor(new Color(230, 238, 255));
+		g2d.rotate(Math.toRadians(45), getSize().width/2, getSize().height/2);//lustro półprzepuszczające
+		g2d.fillRect(getSize().width/2, getSize().height/2-45, 5, 100);
+		
 	}
 	
 	
@@ -205,7 +216,7 @@ public class prostokaty extends JPanel implements Runnable
 			}
 			
 			try {//czekanie między kolejymi wykonaniami
-				Thread.sleep(15);
+				Thread.sleep(30);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
