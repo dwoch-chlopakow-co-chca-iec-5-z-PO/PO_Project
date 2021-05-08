@@ -9,11 +9,10 @@ import javax.swing.JPanel;
 public class prostokaty extends JPanel implements Runnable
 {
 
-	prostokat pocz, pion;
+	prostokat pocz, pion;//nie zmieniać!
 	boolean active = true;
-	int pauza;
-	int vx = 5;
-	int vy = 5;
+	double vx = 5;//tego też nie
+	double vy = 5;//ani tego
 	
 	public void setActive(boolean b)//ustawiamy czy symulacja jest aktywna
 	{
@@ -30,10 +29,10 @@ public class prostokaty extends JPanel implements Runnable
 		p.setvy(-p.getvy());
 	}
 	
-	public void modV(int k, int v)//metoda pozwalająca uwzględniać prędkość wiatru eteru
+	public void modV(double k, double v)//metoda pozwalająca uwzględniać prędkość wiatru eteru
 	{
-		vx+=(int)(v*Math.cos(Math.toRadians(k)));
-		vy+=(int)(v*Math.sin(Math.toRadians(k)));
+		vx+=(v*Math.cos(Math.toRadians(k)));
+		vy+=(v*Math.sin(Math.toRadians(k)));
 	}
 	
 	public void flip(prostokat p, int k)//metoda przekręcająca prostokąt o dany kąt
@@ -65,16 +64,16 @@ public class prostokaty extends JPanel implements Runnable
 				p.setvx(p.getvy());
 				p.setvy(0);
 			}
-			int h = p.getHeight();
-			int w = p.getWidth();
+			double h = p.getHeight();
+			double w = p.getWidth();
 			p.setHeight(w);
 			p.setWidth(h);
 		}
 		
 		if(k==-90)
 		{
-			int h = p.getHeight();
-			int w = p.getWidth();
+			double h = p.getHeight();
+			double w = p.getWidth();
 			p.setHeight(w);
 			p.setWidth(h);
 			
@@ -109,10 +108,14 @@ public class prostokaty extends JPanel implements Runnable
 		pion.paint(g);
 		
 		g.setColor(Color.blue);
-		g.fillRect(0, getSize().height/2-5, 80, 10);//emiter
+		g.fillRect(0, getSize().height/2-5, 80, 20);//emiter
+		
 		g.setColor(new Color(179, 204, 255));
 		g.fillRect(getSize().width/2-35, 0, 80, 10);//lustro na górze
 		g.fillRect(getSize().width/2+getSize().height/2, getSize().height/2-35, 20, 80);//lustro z prawej
+		
+		g.setColor(new Color(0, 204, 0));
+		g.fillRect(getSize().width/2-6, getSize().height-20, 20, 40);
 		
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(new Color(230, 238, 255));
@@ -158,7 +161,7 @@ public class prostokaty extends JPanel implements Runnable
 			
 			if(pocz.getX()+pocz.getWidth()>=center)//aktywacja po przekroczeniu środka przez laser początkowy
 			{
-				pion.setColor(Color.BLACK);
+				pion.setColor(Color.yellow);
 				
 				if(pocz.getX()+pocz.getWidth()<=center+height/2)//przemieszczamy laser początkowy do kontaktu z prawą ścianką
 				{
@@ -189,7 +192,6 @@ public class prostokaty extends JPanel implements Runnable
 				{
 					pocz.setY(pocz.getY()+pocz.getvy());
 					repaint();
-					System.out.println("poziom: "+pocz.getY());
 				}
 				
 				if(pocz.getY()+pocz.getHeight()+5>=height)
@@ -202,7 +204,6 @@ public class prostokaty extends JPanel implements Runnable
 				{
 					pion.setY(pion.getY()-pion.getvy());
 					repaint();
-					System.out.println("pion: "+pion.getY());
 				}
 			
 				if(pion.getY()<=0) //odbicie lasera na górnej ściance

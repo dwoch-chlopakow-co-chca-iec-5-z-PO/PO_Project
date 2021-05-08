@@ -22,11 +22,11 @@ public class stolik extends JFrame
 	{
 		stolik frame = new stolik();
     	
-    	prostokaty panel = new prostokaty();
+    	prostokaty panel = new prostokaty();//stworzenie panelu
     	panel.setBackground(Color.white);
     	frame.add(panel);
     	frame.setVisible(true);
-    	panel.modV(90, 2);
+    	panel.modV(90, 0.25);//modyfikacja prędkości światła(uwzględnienie eteru)
     	
     	ExecutorService exec = Executors.newFixedThreadPool(1);
     	exec.execute(panel);

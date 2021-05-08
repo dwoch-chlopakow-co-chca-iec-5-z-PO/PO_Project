@@ -2,74 +2,76 @@ package testy;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 public class prostokat
 {
 
-    private int xPos;
-	private int yPos;
-    private int width;
-    private int height;
+    private double xPos;
+	private double yPos;
+    private double width;
+    private double height;
     private Color color = Color.BLACK;
-    private int vx, vy;
+    private double vx, vy;
      
-    public void setvx(int i)
+    public void setvx(double i)
     {
     	vx = i;
     }
     
-    public int getvx()
+    public double getvx()
     {
     	return vx;
     }
     
-    public void setvy(int i)
+    public void setvy(double i)
     {
     	vy = i;
     }
     
-    public int getvy()
+    public double getvy()
     {
     	return vy;
     }
     
-    public int getX() 
+    public double getX() 
     {
 		return xPos;
 	}
 
-	public void setX(int xPos) 
+	public void setX(double xPos) 
 	{
 		this.xPos = xPos;
 	}
 
-    public void setY(int yPos)
+    public void setY(double yPos)
     {
         this.yPos = yPos;
     }
 
-    public int getY()
+    public double getY()
     {
         return yPos;
     }
 
-    public int getWidth()
+    public double getWidth()
     {
         return width;
     } 
 
-    public int getHeight()
+    public double getHeight()
     {
         return height;
     }
 
 
-	public void setWidth(int width) 
+	public void setWidth(double width) 
 	{
 		this.width = width;
 	}
 
-	public void setHeight(int height) 
+	public void setHeight(double height) 
 	{
 		this.height = height;
 	}
@@ -87,6 +89,8 @@ public class prostokat
 	public void paint(Graphics g)
 	{
         g.setColor(getColor());
-        g.fillRect(xPos,yPos,getWidth(),getHeight());
+        Rectangle2D rect = new Rectangle2D.Double(xPos, yPos, width, height);//prostokąt definiowany na double-ach
+        Graphics2D g2 = (Graphics2D) g;
+        g2.fill(rect); 
     }
 }
