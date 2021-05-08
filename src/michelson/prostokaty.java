@@ -1,4 +1,4 @@
-package testy;
+package michelson;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -217,12 +217,6 @@ public class prostokaty extends JPanel implements Runnable
 				{
 					pion.setvy(0);
 				}
-			}
-			
-			try {//czekanie między kolejymi wykonaniami
-				Thread.sleep(30);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		}
 	}

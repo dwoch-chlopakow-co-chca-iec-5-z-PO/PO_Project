@@ -6,6 +6,7 @@ import static java.util.concurrent.TimeUnit.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -138,7 +139,7 @@ public class KlasaGlowna extends JFrame {
 		
 		
 		
-		
+				
 		
 		//Początek dużego panelu
 		
@@ -148,18 +149,23 @@ public class KlasaGlowna extends JFrame {
 			duzy.addArrow();
 		add(duzy);
 		duzy.setVisible(false);
-		duzy.setBackground(Color.black);
 		
 		
 		
 		scheduler.scheduleWithFixedDelay(duzy, 0, 5, MILLISECONDS);
-
 		
 		//Koniec dużego panelu
 		
+		//początek panelu z animacją lasera
+		prostokaty animacja = new prostokaty();
+		this.add(animacja, BorderLayout.CENTER);
+		animacja.setBackground(Color.white);
+		animacja.setActive(true);
 		
+		animacja.setOpaque(false);
 		
-		
+		scheduler.scheduleWithFixedDelay(animacja, 0, 30, MILLISECONDS);
+		//koniec panelu z animacją lasera
 		
 		
 		//Początek prawego panelu
@@ -369,27 +375,25 @@ public class KlasaGlowna extends JFrame {
 		dolny.add(na_start);
 		dolny.add(t);
 		dolny.add(slidery);		
+		
+		
+		
 	}
 
 	
 
 	public static void main(String[] args) {
 		
-		
-		
+		KlasaGlowna frame = new KlasaGlowna();
 		
 		 SwingUtilities.invokeLater(new Runnable() {
 	            @Override
 	            public void run() {
-
-	            	KlasaGlowna frame = new KlasaGlowna();
 	        		frame.setVisible(true);
 	        		frame.setSize(1080,760);
-	        		frame.setMinimumSize(new Dimension(960,600));
-	        		
+	        		frame.setMinimumSize(new Dimension(960,600));		
 	            }
 		 });
-		 
 		 
 		
 	}
