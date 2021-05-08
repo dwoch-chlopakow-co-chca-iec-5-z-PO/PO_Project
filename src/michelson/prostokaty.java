@@ -14,14 +14,21 @@ public class prostokaty extends JPanel implements Runnable
 	double vx = 5;//tego też nie
 	double vy = 5;//ani tego
 	
+	int[] xlustro = {384, 386, 466, 464};
+	int[] ylustro = {289, 291, 211, 209};
+	
+	public prostokaty() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public void setActive(boolean b)//ustawiamy czy symulacja jest aktywna
 	{
 		active = b;
 	}
 
-	prostokaty()
-	{
-	}
+	
 	
 	public void odbij(prostokat p)//odbijamy prostokat (zmieniamy predkosc na przeciwna)
 	{	
@@ -117,10 +124,9 @@ public class prostokaty extends JPanel implements Runnable
 		g.setColor(new Color(0, 204, 0));
 		g.fillRect(getSize().width/2-6, getSize().height-20, 20, 40);
 		
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(new Color(230, 238, 255));
-		g2d.rotate(Math.toRadians(45), getSize().width/2, getSize().height/2);//lustro półprzepuszczające
-		g2d.fillRect(getSize().width/2, getSize().height/2-45, 5, 100);
+		
+		g.setColor(new Color(230, 238, 255));
+		g.fillPolygon(xlustro, ylustro, 4);
 		
 	}
 	

@@ -3,6 +3,7 @@ package michelson;
 
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class ArrowsPanel extends JPanel implements Runnable{
 	private int h = (int)(a * Math.sqrt(3) / 2) + 1;
 	private int w = 2;
 	
+	
 
 	private int x = -240, y = 40;
 	
@@ -30,13 +32,17 @@ public class ArrowsPanel extends JPanel implements Runnable{
 	
 	double k;
 	
+	ArrowsPanel(){
+		this.setOpaque(false);
+		this.setPreferredSize(new Dimension(850, 500));
+	}
+	
 	
 	public void addArrow(){
 			
 		
 	Random r = new Random();
 		
-		Color col1 = new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
 		
 		
 		
@@ -46,6 +52,7 @@ public class ArrowsPanel extends JPanel implements Runnable{
 		
 		int[] xr = {xt[1] - w/2, xt[1] + w/2 + 1, xt[1] + w/2 + 1                 , xt[1] - w/2};
 		int[] yr = {yt[0]      , yt[0]	    , yt[2] + (yt[2] - yt[1])     , yt[2] + (yt[2] - yt[1])};
+		
 		
 		
 		Arrow p = new Arrow();
@@ -58,7 +65,6 @@ public class ArrowsPanel extends JPanel implements Runnable{
 
 		
 		p.setvY(yV);
-		p.setColor(col1);
 		
 		arrows.add(p);	
 		
@@ -82,6 +88,7 @@ public class ArrowsPanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+
 		Graphics2D g2d = (Graphics2D) g;
 		
 		g2d.rotate(Math.toRadians(k), 850/2, 500/2);
@@ -92,6 +99,8 @@ public class ArrowsPanel extends JPanel implements Runnable{
 	
 	@Override
 	public void run() {
+		
+		
 		for (Arrow ar : arrows) {
 				
 				ar.setYts(sub(ar.getYts(), yV));

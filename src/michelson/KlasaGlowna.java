@@ -23,7 +23,7 @@ public class KlasaGlowna extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	final ScheduledExecutorService scheduler = 
-		       Executors.newScheduledThreadPool(1);
+		       Executors.newScheduledThreadPool(2);
 	
 	JMenuBar pasek_menu;
 	JMenu menu;
@@ -73,6 +73,7 @@ public class KlasaGlowna extends JFrame {
 		
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setResizable(false);
 		
 		
 		
@@ -139,15 +140,26 @@ public class KlasaGlowna extends JFrame {
 		
 		
 		
+		//początek panelu z animacją lasera
+		prostokaty animacja = new prostokaty();
+		this.add(animacja, BorderLayout.CENTER);
+		animacja.setBackground(Color.white);
+		animacja.setActive(true);
+		
+		
+		scheduler.scheduleWithFixedDelay(animacja, 0, 30, MILLISECONDS);
+		//koniec panelu z animacją lasera
+		
+		
 				
 		
 		//Początek dużego panelu
 		
 		duzy = new ArrowsPanel();
 		
-		for (int i = 0; i < 230; i++)
+		for (int i = 0; i < 233; i++)
 			duzy.addArrow();
-		add(duzy);
+		animacja.add(duzy);
 		duzy.setVisible(false);
 		
 		
@@ -156,16 +168,6 @@ public class KlasaGlowna extends JFrame {
 		
 		//Koniec dużego panelu
 		
-		//początek panelu z animacją lasera
-		prostokaty animacja = new prostokaty();
-		this.add(animacja, BorderLayout.CENTER);
-		animacja.setBackground(Color.white);
-		animacja.setActive(true);
-		
-		animacja.setOpaque(false);
-		
-		scheduler.scheduleWithFixedDelay(animacja, 0, 30, MILLISECONDS);
-		//koniec panelu z animacją lasera
 		
 		
 		//Początek prawego panelu
