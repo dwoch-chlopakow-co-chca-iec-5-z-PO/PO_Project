@@ -25,6 +25,7 @@ public class KlasaGlowna extends JFrame {
 	final ScheduledExecutorService scheduler = 
 		       Executors.newScheduledThreadPool(2);
 	
+	
 	JMenuBar pasek_menu;
 	JMenu menu;
 	JMenu grubosc_menu;
@@ -147,7 +148,7 @@ public class KlasaGlowna extends JFrame {
 		animacja.setActive(true);
 		
 		
-		scheduler.scheduleWithFixedDelay(animacja, 0, 30, MILLISECONDS);
+		scheduler.scheduleWithFixedDelay(animacja, 0, 5, MILLISECONDS);
 		//koniec panelu z animacją lasera
 		
 		
@@ -165,6 +166,8 @@ public class KlasaGlowna extends JFrame {
 		
 		
 		scheduler.scheduleWithFixedDelay(duzy, 0, 5, MILLISECONDS);
+		
+		
 		
 		//Koniec dużego panelu
 		
@@ -263,6 +266,8 @@ public class KlasaGlowna extends JFrame {
 					tytul1.setVisible(false);
 					tytul2.setVisible(false);
 					duzy.setVisible(false);
+					predkosc.setValue(0);
+					obrot.setValue(0);
 					revalidate();
 				}
 			}
