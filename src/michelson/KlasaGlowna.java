@@ -146,7 +146,7 @@ public class KlasaGlowna extends JFrame {
 		this.add(animacja, BorderLayout.CENTER);
 		animacja.setBackground(Color.white);
 		animacja.setActive(false);
-		
+		animacja.modV(90, 2);
 		
 		
 		scheduler.scheduleWithFixedDelay(animacja, 0, 30, MILLISECONDS);
@@ -235,9 +235,11 @@ public class KlasaGlowna extends JFrame {
 		        if (n == JOptionPane.NO_OPTION) {
 			        kolor = JColorChooser.showDialog(null, "Wybierz kolor z palety kolorów", Color.darkGray);
 		        	duzy.setBackground(kolor);
-		        } else if (n == JOptionPane.YES_OPTION) {
+		        	animacja.setBackgroundColor(kolor);
+		        } 
+		        else if (n == JOptionPane.YES_OPTION) {
 			        kolor = JColorChooser.showDialog(null, "Wybierz kolor z palety kolorów", Color.darkGray);
-		        //	wiazka.setBackground(kolor);
+		        	animacja.setLaserColor(kolor);
 		        }
 			}
 		}

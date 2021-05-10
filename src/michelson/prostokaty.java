@@ -27,7 +27,7 @@ public class prostokaty extends JPanel implements Runnable
 		pocz.setvy(0);
 		pocz.setWidth(40);
 		pocz.setHeight(10);
-		pocz.setColor(new Color(255, 0, 0, 200));
+		pocz.setColor(new Color(255, 0, 0, 127));
 		
 		pion.setX(0);
 		pion.setY(250);
@@ -36,7 +36,7 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setWidth(40);
 		pion.setHeight(10);
 		
-		pion.setColor(new Color(255, 255, 0, 200));	
+		pion.setColor(new Color(255, 255, 0, 127));	
 	}
 
 
@@ -44,6 +44,16 @@ public class prostokaty extends JPanel implements Runnable
 	public void setActive(boolean b)//ustawiamy czy symulacja jest aktywna
 	{
 		active = b;
+	}
+	
+	public void setBackgroundColor(Color k)
+	{
+		setBackground(k);
+	}
+	
+	public void setLaserColor(Color k)
+	{
+		
 	}
 
 	public void reset()
@@ -77,6 +87,11 @@ public class prostokaty extends JPanel implements Runnable
 	{
 		vx+=(v*Math.cos(Math.toRadians(k)));
 		vy+=(v*Math.sin(Math.toRadians(k)));
+		pocz.setvx(vx);
+		pocz.setvy(0);
+		pion.setvx(vx);
+		pion.setvy(0);
+		System.out.println(pion.getvx());
 	}
 	
 	public void flip(prostokat p, int k)//metoda przekręcająca prostokąt o dany kąt
@@ -156,10 +171,10 @@ public class prostokaty extends JPanel implements Runnable
 		
 		g.setColor(new Color(179, 204, 255));
 		g.fillRect(getSize().width/2-35, 0, 80, 10);//lustro na górze
-		g.fillRect(getSize().width/2+getSize().height/2, getSize().height/2-50, 20, 80);//lustro z prawej
+		g.fillRect(getSize().width/2+getSize().height/2-10, getSize().height/2-50, 20, 80);//lustro z prawej
 		
 		g.setColor(new Color(0, 204, 0));
-		g.fillRect(getSize().width/2-3, getSize().height-20, 20, 40);//odbiornik
+		g.fillRect(getSize().width/2-3, getSize().height-20, 21, 40);//odbiornik
 		
 		
 		g.setColor(new Color(230, 238, 255));//zwierciadło półprzepuszczalne
@@ -199,6 +214,7 @@ public class prostokaty extends JPanel implements Runnable
 					pion.setvx(0);
 					pion.setY(pion.getY()-pion.getvy()-20);
 					repaint();
+					System.out.println(pion.getvy());
 				}
 				
 				if(pocz.getX()+pocz.getWidth()<=center+height/2)//przemieszczamy laser początkowy do kontaktu z prawym lustrem
