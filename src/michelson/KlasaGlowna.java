@@ -145,10 +145,11 @@ public class KlasaGlowna extends JFrame {
 		prostokaty animacja = new prostokaty();
 		this.add(animacja, BorderLayout.CENTER);
 		animacja.setBackground(Color.white);
-		animacja.setActive(true);
+		animacja.setActive(false);
 		
 		
-		scheduler.scheduleWithFixedDelay(animacja, 0, 5, MILLISECONDS);
+		
+		scheduler.scheduleWithFixedDelay(animacja, 0, 30, MILLISECONDS);
 		//koniec panelu z animacją lasera
 		
 		
@@ -310,6 +311,16 @@ public class KlasaGlowna extends JFrame {
 		dolny.setLayout(new GridLayout(1, 3));
 		JButton start = new JButton("Rozpocznij symulacje");// do dodania actionlistener
 		start.setFont(new Font("Arial", Font.PLAIN, 20));//ustawienia fonta
+		
+		start.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+			animacja.reset();
+			animacja.setActive(true);
+			}
+		});
+		
 		//JPanel na_start = new JPanel(new GridLayout(6, 1)); 
 		JPanel na_start = new JPanel(new GridBagLayout()); //decyzja czy lepszy griLayout czy gridbag
 		na_start.setBorder(BorderFactory.createLineBorder(Color.black, 1));//ustawienia borderów
