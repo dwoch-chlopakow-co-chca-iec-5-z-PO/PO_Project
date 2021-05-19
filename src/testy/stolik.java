@@ -21,7 +21,7 @@ public class stolik extends JFrame
 	public static void main(String[] args)
 	{
 		stolik frame = new stolik();
-    	
+    	/*
     	prostokaty panel = new prostokaty();//stworzenie panelu
     	panel.setBackground(Color.white);
     	frame.add(panel);
@@ -31,5 +31,6 @@ public class stolik extends JFrame
     	ExecutorService exec = Executors.newFixedThreadPool(1);
     	exec.execute(panel);
     	exec.shutdown();
+    	*/
 	}
 }
