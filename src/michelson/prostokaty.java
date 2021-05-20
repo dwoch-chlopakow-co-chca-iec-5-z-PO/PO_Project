@@ -91,7 +91,6 @@ public class prostokaty extends JPanel implements Runnable
 		pocz.setvy(0);
 		pion.setvx(vx);
 		pion.setvy(0);
-		System.out.println(pion.getvx());
 	}
 	
 	public void flip(prostokat p, int k)//metoda przekręcająca prostokąt o dany kąt
