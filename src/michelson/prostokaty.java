@@ -85,17 +85,12 @@ public class prostokaty extends JPanel implements Runnable
 	
 	public void modV(double k, double v)//metoda pozwalająca uwzględniać prędkość wiatru eteru
 	{
-		vx+=(v*Math.cos(Math.toRadians(k)));
-		vy+=(v*Math.sin(Math.toRadians(k)));
+		vx+=(v*Math.sin(Math.toRadians(k)))/100;
+		vy+=(v*Math.cos(Math.toRadians(k)))/100;
 		pocz.setvx(vx);
-		pocz.setvy(0);
+		pocz.setvy(vy);
 		pion.setvx(vx);
-		pion.setvy(0);
-	}
-	
-	public void setV(double v)
-	{
-		vx = v;
+		pion.setvy(vy);
 	}
 	
 	public void flip(prostokat p, int k)//metoda przekręcająca prostokąt o dany kąt
@@ -175,7 +170,7 @@ public class prostokaty extends JPanel implements Runnable
 		
 		g.setColor(new Color(179, 204, 255));
 		g.fillRect(getSize().width/2-35, 0, 80, 10);//lustro na górze
-		g.fillRect(getSize().width/2+getSize().height/2-10, getSize().height/2-50, 20, 80);//lustro z prawej
+		g.fillRect(getSize().width/2+getSize().height/2-20, getSize().height/2-50, 20, 80);//lustro z prawej
 		
 		g.setColor(new Color(0, 204, 0));
 		g.fillRect(getSize().width/2-3, getSize().height-20, 21, 40);//odbiornik
@@ -194,7 +189,7 @@ public class prostokaty extends JPanel implements Runnable
 		int center = width/2;
 		if(active)
 		{
-			if(pocz.getX()+pocz.getWidth()<center)//przemieszczanie lasera w lewo
+			if(pocz.getX()+pocz.getWidth()<center)//przemieszczanie lasera w prawo
 			{
 				pocz.setX(pocz.getX()+pocz.getvx());
 				repaint();
@@ -208,42 +203,57 @@ public class prostokaty extends JPanel implements Runnable
 			
 			if(pocz.getX()+pocz.getWidth()>=center)//aktywacja po przekroczeniu środka przez laser początkowy
 			{
+				
 				if(pion.getX()+pion.getWidth()>=center && pion.getvx()!=0)//zmiana kierunku lasera pion na pionowy
 				{
 					flip(pion, -90);
-					pion.setvy(pocz.getvx());
-					pion.setY(pion.getY()+pion.getvy()+10);
-					pion.setX(pion.getX()+35);
+					if(vy<vx)
+					{
+						pion.setvy(5);
+					}
+					else
+					{
+						pion.setvy(vy);
+					}
 					
+					
+					pion.setY(height/2);
+					pion.setX(center-5);
+					System.out.println("y1 = "+pion.getY());
+					System.out.println("x1 = "+pocz.getX());
 					pion.setvx(0);
-					pion.setY(pion.getY()-pion.getvy()-20);
 					repaint();
-					System.out.println(pion.getvy());
 				}
 				
-				if(pocz.getX()+pocz.getWidth()<=center+height/2)//przemieszczamy laser początkowy do kontaktu z prawym lustrem
+				if(pocz.getX()<630)//przemieszczamy laser początkowy do kontaktu z prawym lustrem
 				{
 					pocz.setX(pocz.getX()+pocz.getvx());
 					repaint();
 				}	
 				
-				if(pocz.getX()+pocz.getWidth()>=center+height/2)//odbijamy początkowy laser od lustra
+				if(pocz.getX()>=630)//odbijamy początkowy laser od lustra
 				{
 					odbij(pocz);
 					pocz.setX(pocz.getX()+pocz.getvx());
 					repaint();
-					System.out.println("x: "+pocz.getX());
+					System.out.println("x2 = "+pocz.getX());
 				}
 				
 				if(pocz.getX()<center && pocz.getvx()<0)//zmieniamy kierunek początkowego laser na pionowy i w dół
 				{
 					flip(pocz, -90);
 					pocz.setvy(pocz.getvx());
-					pocz.setY(pocz.getY()-30+pocz.getvy());
+					pocz.setY(height/2-pocz.getHeight()-pocz.getvy());
+					pocz.setX(center-5);
 					
 					pocz.setvx(0);
 					pocz.setY(pocz.getY()-pocz.getvy());
 					repaint();
+					
+					if(vx==vy&&vx!=5)
+					{
+						pocz.setY(pion.getY());
+					}
 				}
 				
 				if(pocz.getY()+pocz.getHeight()-25<height)//przemieszczamy początkowy laser w dół
@@ -268,12 +278,17 @@ public class prostokaty extends JPanel implements Runnable
 					odbij(pion);
 					pion.setY(pion.getY()-pion.getvy());
 					repaint();
-					System.out.println("y: "+pion.getY());
+					System.out.println("y2 = "+pion.getY());
 				}
 				
 				if(pion.getY()+pion.getHeight()-25>=height)//zatrzymanie lasera na dolnej krawędzi
 				{
 					pion.setvy(0);
+				}
+				
+				if(pion.getY()+pion.getHeight()-25>=height && pocz.getY()>=height )//ustawiamy animacje na nieaktywną
+				{
+					active = false;
 				}
 			}
 		}

@@ -58,7 +58,7 @@ public class KlasaGlowna extends JFrame {
 	Color kolor;
 	
 	static final int predkosc_min = 0;
-	static final int predkosc_max = 10;
+	static final int predkosc_max = 50;
 	static final int predkosc_init = 0;
 	
 	static final int obrot_min = -180;
@@ -97,6 +97,7 @@ public class KlasaGlowna extends JFrame {
 			}
 			
 		});
+		
 		
 		obrot = new JSlider(JSlider.HORIZONTAL, obrot_min, obrot_max, obrot_init);//dod dodania listener
 		
@@ -156,14 +157,12 @@ public class KlasaGlowna extends JFrame {
 				//Koniec menu
 		
 		
-		
-		
 		//początek panelu z animacją lasera
 		animacja = new prostokaty();
 		this.add(animacja, BorderLayout.CENTER);
 		animacja.setBackground(Color.white);
 		animacja.setActive(false);
-		animacja.modV(0, 2);
+		animacja.modV(0, 50);
 		
 		scheduler.scheduleWithFixedDelay(animacja, 0, 30, MILLISECONDS);
 		//koniec panelu z animacją lasera
@@ -400,8 +399,8 @@ public class KlasaGlowna extends JFrame {
 		slidery.add(tytul2);
 		slidery.add(obrot);
 		
-		predkosc.setMajorTickSpacing(2);//dodanie upiększeń do slidera
-		predkosc.setMinorTickSpacing(1);
+		predkosc.setMajorTickSpacing(10);//dodanie upiększeń do slidera
+		predkosc.setMinorTickSpacing(5);
 		predkosc.setPaintTicks(true);
 		predkosc.setPaintLabels(true);
 		
