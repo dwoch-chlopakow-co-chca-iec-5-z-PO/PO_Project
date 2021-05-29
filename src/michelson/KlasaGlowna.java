@@ -38,6 +38,7 @@ public class KlasaGlowna extends JFrame {
 	
 	
 	static ArrowsPanel duzy;
+	static prostokaty animacja;
 	JPanel prawy;
 	JPanel dolny;
 	
@@ -84,9 +85,30 @@ public class KlasaGlowna extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		
+		//slidery
+		predkosc = new JSlider(JSlider.HORIZONTAL, predkosc_min, predkosc_max, predkosc_init);//do dodania listener
 		
+		predkosc.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				duzy.setyV(predkosc.getValue());
+				
+			}
+			
+		});
 		
+		obrot = new JSlider(JSlider.HORIZONTAL, obrot_min, obrot_max, obrot_init);//dod dodania listener
 		
+		obrot.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				duzy.setk(obrot.getValue());
+			}
+			
+		});
+		//koniec sliderów
 		
 		//Menu
 		
@@ -115,10 +137,6 @@ public class KlasaGlowna extends JFrame {
 				menu.add(dane);
 				
 				
-				
-				
-				
-				
 				dzialanie.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {		
@@ -141,12 +159,11 @@ public class KlasaGlowna extends JFrame {
 		
 		
 		//początek panelu z animacją lasera
-		prostokaty animacja = new prostokaty();
+		animacja = new prostokaty();
 		this.add(animacja, BorderLayout.CENTER);
 		animacja.setBackground(Color.white);
 		animacja.setActive(false);
-		animacja.modV(90, 2);
-		
+		animacja.modV(0, 2);
 		
 		scheduler.scheduleWithFixedDelay(animacja, 0, 30, MILLISECONDS);
 		//koniec panelu z animacją lasera
@@ -365,31 +382,7 @@ public class KlasaGlowna extends JFrame {
 		slidery.setLayout(new GridLayout(4, 1));
 		slidery.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 	
-		predkosc = new JSlider(JSlider.HORIZONTAL, predkosc_min, predkosc_max, predkosc_init);//do dodania listener
 		
-		predkosc.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent arg0) {
-				duzy.setyV(predkosc.getValue());
-			}
-			
-		});
-		
-		
-		
-		
-		
-		obrot = new JSlider(JSlider.HORIZONTAL, obrot_min, obrot_max, obrot_init);//dod dodania listener
-		
-		obrot.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent arg0) {
-				duzy.setk(obrot.getValue());
-			}
-			
-		});
 		
 		
 		

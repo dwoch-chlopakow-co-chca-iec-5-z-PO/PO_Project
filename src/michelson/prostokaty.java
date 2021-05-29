@@ -93,6 +93,11 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setvy(0);
 	}
 	
+	public void setV(double v)
+	{
+		vx = v;
+	}
+	
 	public void flip(prostokat p, int k)//metoda przekręcająca prostokąt o dany kąt
 	{
 		if(k == 180)
@@ -228,8 +233,6 @@ public class prostokaty extends JPanel implements Runnable
 					pocz.setX(pocz.getX()+pocz.getvx());
 					repaint();
 					System.out.println("x: "+pocz.getX());
-					System.out.println("centerx: " +center);
-					System.out.println("centery: " +height/2);
 				}
 				
 				if(pocz.getX()<center && pocz.getvx()<0)//zmieniamy kierunek początkowego laser na pionowy i w dół
