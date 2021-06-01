@@ -14,6 +14,7 @@ public class prostokaty extends JPanel implements Runnable
 	double vx = 5;//tego też nie
 	double vy = 5;//ani tego
 	
+	
 	int[] xlustro = {384, 386, 466, 464};
 	int[] ylustro = {289, 291, 211, 209};
 	
@@ -39,8 +40,8 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setColor(new Color(255, 255, 0, 127));	
 	}
 
-
-
+	
+	
 	public void setActive(boolean b)//ustawiamy czy symulacja jest aktywna
 	{
 		active = b;
@@ -187,6 +188,7 @@ public class prostokaty extends JPanel implements Runnable
 		int height = 500;
 		int width = 850;
 		int center = width/2;
+		while(pion.getX() != 850) {
 		if(active)
 		{
 			if(pocz.getX()+pocz.getWidth()<center)//przemieszczanie lasera w prawo
@@ -292,5 +294,12 @@ public class prostokaty extends JPanel implements Runnable
 				}
 			}
 		}
+		try {
+			Thread.sleep(30);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+		
 	}
 }

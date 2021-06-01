@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
+import java.util.Timer;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.swing.*;
@@ -17,9 +19,8 @@ public class KlasaGlowna extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	
-	final ScheduledExecutorService scheduler = 
-		       Executors.newScheduledThreadPool(2);
-	
+	final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+	final ExecutorService exec = Executors.newSingleThreadExecutor();
 	
 	
 	Locale currentLocale;
@@ -72,7 +73,6 @@ public class KlasaGlowna extends JFrame {
 
 	
 	public KlasaGlowna() throws HeadlessException {
-		
 		
 		
 	currentLocale = new Locale("en");
@@ -162,9 +162,10 @@ public class KlasaGlowna extends JFrame {
 		this.add(animacja, BorderLayout.CENTER);
 		animacja.setBackground(Color.white);
 		animacja.setActive(false);
-		animacja.modV(0, 50);
+		animacja.modV(obrot.getValue(), predkosc.getValue());
 		
-		scheduler.scheduleWithFixedDelay(animacja, 0, 30, MILLISECONDS);
+		exec.execute(animacja);
+		exec.shutdown();
 		//koniec panelu z animacją lasera
 		
 		
@@ -181,7 +182,7 @@ public class KlasaGlowna extends JFrame {
 		
 		
 		
-		scheduler.scheduleWithFixedDelay(duzy, 0, 5, MILLISECONDS);
+		scheduler.scheduleWithFixedDelay(duzy, 0, 15, MILLISECONDS);
 		
 		
 		
@@ -358,10 +359,27 @@ public class KlasaGlowna extends JFrame {
 		
 		start.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 			animacja.reset();
 			animacja.setActive(true);
+			obrot.setEnabled(false);
+			predkosc.setEnabled(false);
+
+			
+			Timer timer = new Timer(true);
+
+
+	        timer.schedule(new TimerTask() {
+	            @Override
+	            public void run() {
+	                SwingUtilities.invokeLater(new Runnable() {
+	                    @Override
+	                    public void run() {
+	                    	obrot.setEnabled(true);
+	        				predkosc.setEnabled(true);
+	                    }
+	                    });
+	                }}, 7350 );
 			}
 		});
 		
@@ -400,9 +418,10 @@ public class KlasaGlowna extends JFrame {
 		slidery.add(obrot);
 		
 		predkosc.setMajorTickSpacing(10);//dodanie upiększeń do slidera
-		predkosc.setMinorTickSpacing(5);
+		predkosc.setMinorTickSpacing(1);
 		predkosc.setPaintTicks(true);
 		predkosc.setPaintLabels(true);
+		predkosc.setSnapToTicks(true);
 		
 		obrot.setMajorTickSpacing(90);//dodanie upiększeń do slidera
 		obrot.setMinorTickSpacing(45);
