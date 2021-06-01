@@ -162,7 +162,7 @@ public class KlasaGlowna extends JFrame {
 		this.add(animacja, BorderLayout.CENTER);
 		animacja.setBackground(Color.white);
 		animacja.setActive(false);
-		animacja.modV(obrot.getValue(), predkosc.getValue());
+		
 		
 		exec.execute(animacja);
 		exec.shutdown();
@@ -301,6 +301,7 @@ public class KlasaGlowna extends JFrame {
 					tytul1.setVisible(true);
 					tytul2.setVisible(true);
 					duzy.setVisible(true);
+					animacja.modV(0, 0);
 					revalidate();
 				}
 				else
@@ -360,6 +361,8 @@ public class KlasaGlowna extends JFrame {
 		start.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+			
+			animacja.modV(obrot.getValue(), predkosc.getValue());
 			animacja.reset();
 			animacja.setActive(true);
 			obrot.setEnabled(false);
@@ -424,9 +427,10 @@ public class KlasaGlowna extends JFrame {
 		predkosc.setSnapToTicks(true);
 		
 		obrot.setMajorTickSpacing(90);//dodanie upiększeń do slidera
-		obrot.setMinorTickSpacing(45);
+		obrot.setMinorTickSpacing(10);
 		obrot.setPaintTicks(true);
 		obrot.setPaintLabels(true);
+		obrot.setSnapToTicks(true);
 		
 		
 		dolny.add(na_start);
