@@ -182,7 +182,7 @@ public class KlasaGlowna extends JFrame {
 		
 		
 		
-		scheduler.scheduleWithFixedDelay(duzy, 0, 15, MILLISECONDS);
+		scheduler.scheduleWithFixedDelay(duzy, 0, 30, MILLISECONDS);
 		
 		
 		
@@ -301,7 +301,8 @@ public class KlasaGlowna extends JFrame {
 					tytul1.setVisible(true);
 					tytul2.setVisible(true);
 					duzy.setVisible(true);
-					animacja.modV(0, 0);
+					animacja.reset();
+					animacja.setActive(false);
 					revalidate();
 				}
 				else
@@ -315,6 +316,8 @@ public class KlasaGlowna extends JFrame {
 					duzy.setVisible(false);
 					predkosc.setValue(0);
 					obrot.setValue(0);
+					animacja.reset();
+					animacja.setActive(false);
 					revalidate();
 				}
 			}
@@ -367,6 +370,7 @@ public class KlasaGlowna extends JFrame {
 			animacja.setActive(true);
 			obrot.setEnabled(false);
 			predkosc.setEnabled(false);
+			prawy_eter.setEnabled(false);
 
 			
 			Timer timer = new Timer(true);
@@ -380,6 +384,8 @@ public class KlasaGlowna extends JFrame {
 	                    public void run() {
 	                    	obrot.setEnabled(true);
 	        				predkosc.setEnabled(true);
+	        				prawy_eter.setEnabled(true);
+	        				animacja.setv(5);
 	                    }
 	                    });
 	                }}, 7350 );

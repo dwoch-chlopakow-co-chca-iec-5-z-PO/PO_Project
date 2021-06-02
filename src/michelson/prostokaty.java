@@ -13,6 +13,7 @@ public class prostokaty extends JPanel implements Runnable
 	boolean active = true;
 	double vx = 5;//tego też nie
 	double vy = 5;//ani tego
+	Color k;
 	
 	
 	int[] xlustro = {384, 386, 466, 464};
@@ -39,6 +40,12 @@ public class prostokaty extends JPanel implements Runnable
 		
 		pion.setColor(new Color(255, 255, 0, 127));	
 	}
+	
+	public void setv(double v)
+	{
+		vx=v;
+		vy=v;
+	}
 
 	
 	
@@ -54,18 +61,26 @@ public class prostokaty extends JPanel implements Runnable
 	
 	public void setLaserColor(Color k)
 	{
-		
+		pocz.setColor(k);
+		pion.setColor(k);
+		repaint();
+		this.k = k;
 	}
 
 	public void reset()
 	{
+		
+		
+		pocz = new prostokat();
+		pion = new prostokat();
+		
 		pocz.setX(0);
 		pocz.setY(250);
 		pocz.setvx(vx);
 		pocz.setvy(0);
 		pocz.setWidth(40);
 		pocz.setHeight(10);
-		pocz.setColor(new Color(255, 0, 0, 200));
+		pocz.setColor(new Color(255, 0, 0, 127));
 		
 		pion.setX(0);
 		pion.setY(250);
@@ -74,7 +89,7 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setWidth(40);
 		pion.setHeight(10);
 		
-		pion.setColor(new Color(255, 255, 0, 200));
+		pion.setColor(new Color(255, 255, 0, 127));	
 	}
 	
 	
@@ -86,6 +101,22 @@ public class prostokaty extends JPanel implements Runnable
 	
 	public void modV(double k, double v)//metoda pozwalająca uwzględniać prędkość wiatru eteru
 	{
+		pocz = new prostokat();
+		pion = new prostokat();
+		
+		pocz.setX(0);
+		pocz.setY(250);
+		pocz.setWidth(40);
+		pocz.setHeight(10);
+		pocz.setColor(new Color(255, 0, 0, 127));
+		
+		pion.setX(0);
+		pion.setY(250);
+		pion.setWidth(40);
+		pion.setHeight(10);
+		
+		pion.setColor(new Color(255, 255, 0, 127));	
+		
 		vx+=(v*Math.sin(Math.toRadians(k)))/100;
 		vy+=(v*Math.cos(Math.toRadians(k)))/100;
 		pocz.setvx(vx);
@@ -188,6 +219,8 @@ public class prostokaty extends JPanel implements Runnable
 		int height = 500;
 		int width = 850;
 		int center = width/2;
+		pocz.setColor(k);
+		pion.setColor(k);
 		while(pion.getX() != 850) {
 		if(active)
 		{
@@ -294,12 +327,13 @@ public class prostokaty extends JPanel implements Runnable
 				}
 			}
 		}
+		
 		try {
 			Thread.sleep(30);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
 		
+	}
 	}
 }
