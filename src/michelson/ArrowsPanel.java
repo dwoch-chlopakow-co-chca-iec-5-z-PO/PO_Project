@@ -19,11 +19,9 @@ public class ArrowsPanel extends JPanel implements Runnable{
 	List<Arrow> arrows = new ArrayList<Arrow>();
 	
 
-	private int a = 11;
-	private int h = (int)(a * Math.sqrt(3) / 2) + 1;
-	private int w = 2;
-	
-	
+	private final int a = 11;
+	private final int h = (int)(a * Math.sqrt(3) / 2) + 1;
+
 
 	private int x = -240, y = 40;
 	
@@ -47,10 +45,11 @@ public class ArrowsPanel extends JPanel implements Runnable{
 		
 		
 
-		int[] xt = {x , x + (int)(a/2), x + a};
+		int[] xt = {x , x + (a/2), x + a};
 		int[] yt = {y + h, y, y + h};
-		
-		int[] xr = {xt[1] - w/2, xt[1] + w/2 + 1, xt[1] + w/2 + 1                 , xt[1] - w/2};
+
+		int w = 2;
+		int[] xr = {xt[1] - w /2, xt[1] + w /2 + 1, xt[1] + w /2 + 1                 , xt[1] - w /2};
 		int[] yr = {yt[0]      , yt[0]	    , yt[2] + (yt[2] - yt[1])     , yt[2] + (yt[2] - yt[1])};
 		
 		
@@ -72,7 +71,7 @@ public class ArrowsPanel extends JPanel implements Runnable{
 		
 		
 		if(xt[2] >= 840) {
-			if(zero == true) {
+			if(zero) {
 				x = 40;
 				zero = false;
 			}
