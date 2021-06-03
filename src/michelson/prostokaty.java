@@ -61,6 +61,20 @@ public class prostokaty extends JPanel implements Runnable
 	
 	public void setLaserColor(Color k)
 	{
+		pocz = new prostokat();
+		pion = new prostokat();
+		
+		pocz.setX(0);
+		pocz.setY(250);
+		pocz.setWidth(40);
+		pocz.setHeight(10);
+		
+		pion.setX(0);
+		pion.setY(250);
+		pion.setWidth(40);
+		pion.setHeight(10);
+		
+		
 		pocz.setColor(k);
 		pion.setColor(k);
 		repaint();
@@ -316,7 +330,7 @@ public class prostokaty extends JPanel implements Runnable
 					System.out.println("y2 = "+pion.getY());
 				}
 				
-				if(pion.getY()+pion.getHeight()-25>=height)//zatrzymanie lasera na dolnej krawędzi
+				if(pion.getY()+pion.getHeight()-25-pion.getvy()/2>=height)//zatrzymanie lasera na dolnej krawędzi
 				{
 					pion.setvy(0);
 				}
