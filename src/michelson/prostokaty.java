@@ -14,6 +14,7 @@ public class prostokaty extends JPanel implements Runnable
 	double vx = 5;//tego też nie
 	double vy = 5;//ani tego
 	Color k_pocz, k_pion;
+	double dvx, dvy;
 	
 	
 	
@@ -23,6 +24,8 @@ public class prostokaty extends JPanel implements Runnable
 	public prostokaty() {
 		k_pocz = new Color(255, 0, 0, 127);
 		k_pion = new Color(255, 255, 0, 127);
+		dvx=0;
+		dvy=0;
 		
 		pocz = new prostokat();
 		pion = new prostokat();
@@ -109,6 +112,8 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setHeight(10);
 		
 		pion.setColor(k_pion);	
+		dvx=0;
+		dvy=0;
 	}
 	
 	
@@ -133,8 +138,10 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setWidth(40);
 		pion.setHeight(10);
 		
-		vx+=(v*Math.sin(Math.toRadians(k)))/100;
-		vy+=(v*Math.cos(Math.toRadians(k)))/100;
+		dvx+=(v*Math.sin(Math.toRadians(k)))/100;
+		dvy+=(v*Math.cos(Math.toRadians(k)))/100;
+		vx+=dvx;
+		vy+=dvy;
 		pocz.setvx(vx);
 		pocz.setvy(vy);
 		pion.setvx(vx);
@@ -283,6 +290,7 @@ public class prostokaty extends JPanel implements Runnable
 				if(pocz.getX()>=630)//odbijamy początkowy laser od lustra
 				{
 					odbij(pocz);
+					pocz.setvx(-5);
 					pocz.setX(pocz.getX()+pocz.getvx());
 					repaint();
 					System.out.println("x2 = "+pocz.getX());
@@ -325,6 +333,7 @@ public class prostokaty extends JPanel implements Runnable
 				if(pion.getY()<=0) //odbicie lasera na górnej ściance
 				{
 					odbij(pion);
+					pion.setvy(-5);
 					pion.setY(pion.getY()-pion.getvy());
 					repaint();
 					System.out.println("y2 = "+pion.getY());
