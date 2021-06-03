@@ -13,13 +13,17 @@ public class prostokaty extends JPanel implements Runnable
 	boolean active = true;
 	double vx = 5;//tego też nie
 	double vy = 5;//ani tego
-	Color k;
+	Color k_pocz, k_pion;
+	
 	
 	
 	int[] xlustro = {384, 386, 466, 464};
 	int[] ylustro = {289, 291, 211, 209};
 	
 	public prostokaty() {
+		k_pocz = new Color(255, 0, 0, 127);
+		k_pion = new Color(255, 255, 0, 127);
+		
 		pocz = new prostokat();
 		pion = new prostokat();
 		
@@ -29,7 +33,7 @@ public class prostokaty extends JPanel implements Runnable
 		pocz.setvy(0);
 		pocz.setWidth(40);
 		pocz.setHeight(10);
-		pocz.setColor(new Color(255, 0, 0, 127));
+		pocz.setColor(k_pocz);
 		
 		pion.setX(0);
 		pion.setY(250);
@@ -38,7 +42,7 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setWidth(40);
 		pion.setHeight(10);
 		
-		pion.setColor(new Color(255, 255, 0, 127));	
+		pion.setColor(k_pion);	
 	}
 	
 	public void setv(double v)
@@ -78,7 +82,8 @@ public class prostokaty extends JPanel implements Runnable
 		pocz.setColor(k);
 		pion.setColor(k);
 		repaint();
-		this.k = k;
+		this.k_pocz = k;
+		this.k_pion = k;
 	}
 
 	public void reset()
@@ -94,7 +99,7 @@ public class prostokaty extends JPanel implements Runnable
 		pocz.setvy(0);
 		pocz.setWidth(40);
 		pocz.setHeight(10);
-		pocz.setColor(new Color(255, 0, 0, 127));
+		pocz.setColor(k_pocz);
 		
 		pion.setX(0);
 		pion.setY(250);
@@ -103,7 +108,7 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setWidth(40);
 		pion.setHeight(10);
 		
-		pion.setColor(new Color(255, 255, 0, 127));	
+		pion.setColor(k_pion);	
 	}
 	
 	
@@ -122,14 +127,11 @@ public class prostokaty extends JPanel implements Runnable
 		pocz.setY(250);
 		pocz.setWidth(40);
 		pocz.setHeight(10);
-		pocz.setColor(new Color(255, 0, 0, 127));
 		
 		pion.setX(0);
 		pion.setY(250);
 		pion.setWidth(40);
 		pion.setHeight(10);
-		
-		pion.setColor(new Color(255, 255, 0, 127));	
 		
 		vx+=(v*Math.sin(Math.toRadians(k)))/100;
 		vy+=(v*Math.cos(Math.toRadians(k)))/100;
@@ -233,8 +235,6 @@ public class prostokaty extends JPanel implements Runnable
 		int height = 500;
 		int width = 850;
 		int center = width/2;
-		pocz.setColor(k);
-		pion.setColor(k);
 		while(pion.getX() != 850) {
 		if(active)
 		{
