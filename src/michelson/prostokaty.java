@@ -9,10 +9,11 @@ import javax.swing.JPanel;
 public class prostokaty extends JPanel implements Runnable
 {
 
+	int delta;
 	prostokat pocz, pion;//nie zmieniać!
 	boolean active = true;
-	double vx = 5;//tego też nie
-	double vy = 5;//ani tego
+	double vx = 1;//tego też nie
+	double vy = 1;//ani tego
 	Color k_pocz, k_pion;
 	double dvx, dvy;
 	
@@ -58,6 +59,7 @@ public class prostokaty extends JPanel implements Runnable
 	
 	public void setActive(boolean b)//ustawiamy czy symulacja jest aktywna
 	{
+		delta = 0;
 		active = b;
 	}
 	
@@ -290,7 +292,7 @@ public class prostokaty extends JPanel implements Runnable
 				if(pocz.getX()>=630)//odbijamy początkowy laser od lustra
 				{
 					odbij(pocz);
-					pocz.setvx(-5);
+					pocz.setvx(-1);
 					pocz.setX(pocz.getX()+pocz.getvx());
 					repaint();
 					System.out.println("x2 = "+pocz.getX());
@@ -333,7 +335,7 @@ public class prostokaty extends JPanel implements Runnable
 				if(pion.getY()<=0) //odbicie lasera na górnej ściance
 				{
 					odbij(pion);
-					pion.setvy(-5);
+					pion.setvy(-1);
 					pion.setY(pion.getY()-pion.getvy());
 					repaint();
 					System.out.println("y2 = "+pion.getY());
@@ -342,17 +344,31 @@ public class prostokaty extends JPanel implements Runnable
 				if(pion.getY()+pion.getHeight()-25-pion.getvy()/2>=height)//zatrzymanie lasera na dolnej krawędzi
 				{
 					pion.setvy(0);
+					System.out.println("Delta = " + delta);
 				}
-				
-				if(pion.getY()+pion.getHeight()-25>=height && pocz.getY()>=height )//ustawiamy animacje na nieaktywną
+				System.out.println("Aktywne");
+
+				if(pion.getY()+pion.getHeight()-25 > 499  && pocz.getY()+pocz.getHeight() - 25 > 499)//ustawiamy animacje na nieaktywną
 				{
+					System.out.println("Nieaktywne");
 					active = false;
+					System.out.println(delta);
+				}
+
+				if(pion.getY()+pion.getHeight()-25 >= 500  && pocz.getY()+pocz.getHeight() - 25 != 500){
+					delta++;
+				}
+
+				if(pion.getY()+pion.getHeight()-25 != 500  && pocz.getY()+pocz.getHeight() - 25 >= 500){
+					delta++;
 				}
 			}
+
 		}
-		
-		try {
-			Thread.sleep(30);
+
+
+			try {
+			Thread.sleep(6);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
