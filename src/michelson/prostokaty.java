@@ -346,23 +346,29 @@ public class prostokaty extends JPanel implements Runnable
 					pion.setvy(0);
 					System.out.println("Delta = " + delta);
 				}
-				System.out.println("Aktywne");
-
-				if(pion.getY()+pion.getHeight()-25 > 499  && pocz.getY()+pocz.getHeight() - 25 > 499)//ustawiamy animacje na nieaktywną
-				{
-					System.out.println("Nieaktywne");
-					active = false;
-					System.out.println(delta);
-				}
-
-				if(pion.getY()+pion.getHeight()-25 >= 500  && pocz.getY()+pocz.getHeight() - 25 != 500){
-					delta++;
-				}
-
-				if(pion.getY()+pion.getHeight()-25 != 500  && pocz.getY()+pocz.getHeight() - 25 >= 500){
-					delta++;
-				}
 			}
+
+		//	System.out.println("Aktywne");
+
+			if(pion.getY()+pion.getHeight()-25 > 499  && pocz.getY()+pocz.getHeight() - 25 > 499)//ustawiamy animacje na nieaktywną
+			{
+				System.out.println("Nieaktywne");
+				active = false;
+				System.out.println(delta);
+			}
+
+			if(pion.getY()+pion.getHeight() - 25 >= 500  && pocz.getY()+pocz.getHeight() - 25 != 500){
+				delta++;
+				System.out.println(pion.getY()+pion.getHeight() - 25);
+				System.out.println(pocz.getY()+pocz.getHeight() - 25);
+			}
+
+			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 >= 500){
+				delta++;
+				System.out.println(pion.getY()+pion.getHeight() - 25);
+				System.out.println(pocz.getY()+pocz.getHeight() - 25);
+			}
+
 
 		}
 
