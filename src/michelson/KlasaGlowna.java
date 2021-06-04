@@ -21,8 +21,9 @@ public class KlasaGlowna extends JFrame {
 	
 	final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 	final ExecutorService exec = Executors.newSingleThreadExecutor();
-	
-	
+	JLabel delta_t = new JLabel();
+
+
 	Locale currentLocale;
 	ResourceBundle messages;
 	
@@ -372,7 +373,10 @@ public class KlasaGlowna extends JFrame {
 			predkosc.setEnabled(false);
 			prawy_eter.setEnabled(false);
 
-			
+
+
+			delta_t.setFont(new Font("Arial", Font.PLAIN, 20));
+
 			Timer timer = new Timer(true);
 
 
@@ -385,10 +389,13 @@ public class KlasaGlowna extends JFrame {
 	                    	obrot.setEnabled(true);
 	        				predkosc.setEnabled(true);
 	        				prawy_eter.setEnabled(true);
-	        				animacja.setv(5);
+	        				animacja.setv(1);
+							delta_t.setText("\u0394 t = " + prostokaty.getDelta());
+							dolny.revalidate();
+							dolny.repaint();
 	                    }
 	                    });
-	                }}, 7350 );
+	                }}, 12000 );
 			}
 		});
 		
@@ -398,8 +405,10 @@ public class KlasaGlowna extends JFrame {
 		na_start.add(start);
 
 		JPanel t = new JPanel(new GridBagLayout());//GridbagLayout żeby wycentrować JLabel
-		JLabel delta_t = new JLabel("\u0394 t= ");
-		delta_t.setFont(new Font("Arial", Font.PLAIN, 20));
+
+
+
+
 		t.add(delta_t);
 		t.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 

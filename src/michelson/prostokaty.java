@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class prostokaty extends JPanel implements Runnable
 {
 
-	int delta;
+	static int delta;
 	prostokat pocz, pion;//nie zmieniać!
 	boolean active = true;
 	double vx = 1;//tego też nie
@@ -117,7 +117,10 @@ public class prostokaty extends JPanel implements Runnable
 		dvx=0;
 		dvy=0;
 	}
-	
+
+	public static int getDelta(){
+		return delta;
+	}
 	
 	public void odbij(prostokat p)//odbijamy prostokat (zmieniamy predkosc na przeciwna)
 	{	
@@ -148,6 +151,7 @@ public class prostokaty extends JPanel implements Runnable
 		pocz.setvy(vy);
 		pion.setvx(vx);
 		pion.setvy(vy);
+
 	}
 	
 	public void flip(prostokat p, int k)//metoda przekręcająca prostokąt o dany kąt
@@ -214,6 +218,7 @@ public class prostokaty extends JPanel implements Runnable
 			}
 		}
 	}
+
 	
 	
 	public void paintComponent(Graphics g) 
@@ -261,13 +266,12 @@ public class prostokaty extends JPanel implements Runnable
 			
 			if(pocz.getX()+pocz.getWidth()>=center)//aktywacja po przekroczeniu środka przez laser początkowy
 			{
-				
 				if(pion.getX()+pion.getWidth()>=center && pion.getvx()!=0)//zmiana kierunku lasera pion na pionowy
 				{
 					flip(pion, -90);
 					if(vy<vx)
 					{
-						pion.setvy(5);
+						pion.setvy(1);
 					}
 					else
 					{
@@ -276,7 +280,7 @@ public class prostokaty extends JPanel implements Runnable
 					
 					
 					pion.setY(height/2);
-					pion.setX(center-5);
+					pion.setX(center-1);
 					System.out.println("y1 = "+pion.getY());
 					System.out.println("x1 = "+pocz.getX());
 					pion.setvx(0);
@@ -303,7 +307,7 @@ public class prostokaty extends JPanel implements Runnable
 					flip(pocz, -90);
 					pocz.setvy(pocz.getvx());
 					pocz.setY(height/2-pocz.getHeight()-pocz.getvy());
-					pocz.setX(center-5);
+					pocz.setX(center-1);
 					
 					pocz.setvx(0);
 					pocz.setY(pocz.getY()-pocz.getvy());
@@ -344,35 +348,30 @@ public class prostokaty extends JPanel implements Runnable
 				if(pion.getY()+pion.getHeight()-25-pion.getvy()/2>=height)//zatrzymanie lasera na dolnej krawędzi
 				{
 					pion.setvy(0);
-					System.out.println("Delta = " + delta);
+				//	System.out.println("Delta = " + delta);
 				}
 			}
 
 		//	System.out.println("Aktywne");
 
-			if(pion.getY()+pion.getHeight()-25 > 499  && pocz.getY()+pocz.getHeight() - 25 > 499)//ustawiamy animacje na nieaktywną
-			{
-				System.out.println("Nieaktywne");
-				active = false;
-				System.out.println(delta);
-			}
 
 			if(pion.getY()+pion.getHeight() - 25 >= 500  && pocz.getY()+pocz.getHeight() - 25 != 500){
 				delta++;
-				System.out.println(pion.getY()+pion.getHeight() - 25);
-				System.out.println(pocz.getY()+pocz.getHeight() - 25);
 			}
 
 			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 >= 500){
 				delta++;
-				System.out.println(pion.getY()+pion.getHeight() - 25);
-				System.out.println(pocz.getY()+pocz.getHeight() - 25);
+			}
+
+			if(pion.getY()+pion.getHeight()-25 > 499  && pocz.getY()+pocz.getHeight() - 25 > 499)//ustawiamy animacje na nieaktywną
+			{
+				System.out.println("Nieaktywne");
+				active = false;
+
 			}
 
 
 		}
-
-
 			try {
 			Thread.sleep(6);
 		} catch (InterruptedException e) {
