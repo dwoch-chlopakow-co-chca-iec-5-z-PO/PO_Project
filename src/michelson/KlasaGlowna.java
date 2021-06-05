@@ -372,7 +372,7 @@ public class KlasaGlowna extends JFrame {
 			obrot.setEnabled(false);
 			predkosc.setEnabled(false);
 			prawy_eter.setEnabled(false);
-
+			delta_t.setText("");
 
 
 			delta_t.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -390,12 +390,12 @@ public class KlasaGlowna extends JFrame {
 	        				predkosc.setEnabled(true);
 	        				prawy_eter.setEnabled(true);
 	        				animacja.setv(1);
-							delta_t.setText("\u0394 t = " + prostokaty.getDelta());
+							delta_t.setText("\u0394 t = " + prostokaty.getDelta()*6+" ms");
 							dolny.revalidate();
 							dolny.repaint();
 	                    }
 	                    });
-	                }}, 12000 );
+	                }}, 8000 );
 			}
 		});
 		

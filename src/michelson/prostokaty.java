@@ -235,7 +235,7 @@ public class prostokaty extends JPanel implements Runnable
 		g.fillRect(getSize().width/2+getSize().height/2-20, getSize().height/2-50, 20, 80);//lustro z prawej
 		
 		g.setColor(new Color(0, 204, 0));
-		g.fillRect(getSize().width/2-3, getSize().height-20, 21, 40);//odbiornik
+		g.fillRect(getSize().width/2+1, getSize().height-20, 21, 40);//odbiornik
 		
 		
 		g.setColor(new Color(230, 238, 255));//zwierciadło półprzepuszczalne
