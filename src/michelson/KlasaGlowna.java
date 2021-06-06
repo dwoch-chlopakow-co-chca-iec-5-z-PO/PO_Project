@@ -70,7 +70,8 @@ public class KlasaGlowna extends JFrame {
 	int czy_wiatr = 0;
 	
 	int jezyk = 0;
-	
+	JLabel velo = new JLabel();
+	JLabel deg = new JLabel();
 
 	
 	public KlasaGlowna() throws HeadlessException {
@@ -94,6 +95,8 @@ public class KlasaGlowna extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				duzy.setyV(predkosc.getValue());
+				deg.setText("Prędkość: "+((double)predkosc.getValue()/100.0));
+				repaint();
 				
 			}
 			
@@ -107,6 +110,9 @@ public class KlasaGlowna extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				duzy.setk(obrot.getValue());
+				deg.setText("Kąt: "+obrot.getValue());
+				repaint();
+
 			}
 			
 		});
@@ -303,6 +309,7 @@ public class KlasaGlowna extends JFrame {
 					duzy.setVisible(true);
 					animacja.reset();
 					animacja.setActive(false);
+					predkosc.setValue(1);
 					revalidate();
 				}
 				else
@@ -373,7 +380,7 @@ public class KlasaGlowna extends JFrame {
 				predkosc.setEnabled(false);
 				prawy_eter.setEnabled(false);
 				start.setEnabled(false);
-				delta_t.setText("");
+				delta_t.setText("\u0394 t = ");
 
 
 				delta_t.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -405,13 +412,14 @@ public class KlasaGlowna extends JFrame {
 		JPanel na_start = new JPanel(new GridBagLayout()); //decyzja czy lepszy griLayout czy gridbag
 		na_start.setBorder(BorderFactory.createLineBorder(Color.black, 1));//ustawienia borderów
 		na_start.add(start);
+		na_start.add(delta_t);
 
 		JPanel t = new JPanel(new GridBagLayout());//GridbagLayout żeby wycentrować JLabel
 
+		t.add(velo);
+		t.add(deg);
 
 
-
-		t.add(delta_t);
 		t.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
 		
@@ -442,13 +450,12 @@ public class KlasaGlowna extends JFrame {
 		predkosc.setPaintTicks(true);
 		predkosc.setPaintLabels(true);
 		predkosc.setSnapToTicks(true);
-		
+
 		obrot.setMajorTickSpacing(90);//dodanie upiększeń do slidera
 		obrot.setMinorTickSpacing(10);
 		obrot.setPaintTicks(true);
 		obrot.setPaintLabels(true);
-		obrot.setSnapToTicks(true);
-		
+
 		
 		dolny.add(na_start);
 		dolny.add(t);

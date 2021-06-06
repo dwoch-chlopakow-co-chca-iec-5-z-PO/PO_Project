@@ -13,7 +13,7 @@ public class prostokaty extends JPanel implements Runnable
 	double vx = 1;//tego też nie
 	double vy = 1;//ani tego
 	Color k_pocz, k_pion;
-	double dvx, dvy;
+	double dvx, dvy, dv1, dv2;
 	
 	
 	
@@ -120,8 +120,7 @@ public class prostokaty extends JPanel implements Runnable
 		return delta;
 	}
 	
-	public void odbij(prostokat p)//odbijamy prostokat (zmieniamy predkosc na przeciwna)
-	{	
+	public void odbij(prostokat p) {//odbijamy prostokat (zmieniamy predkosc na przeciwna)
 		p.setvx(-p.getvx());
 		p.setvy(-p.getvy());
 	}
@@ -140,16 +139,17 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setY(this.getHeight()/2);
 		pion.setWidth(40);
 		pion.setHeight(10);
-		
-		dvx+=(v*Math.sin(Math.toRadians(k)))/100;
-		dvy+=(v*Math.cos(Math.toRadians(k)))/100;
+		dv1 = Math.round(1000.0*Math.sin(Math.toRadians(k)))/1000.0;
+		dv2 = Math.round(1000.0*Math.cos(Math.toRadians(k)))/1000.0;
+
+		dvx+=(Math.round(1000.0*v*dv1)/1000.0)/100.0;
+		dvy+=(Math.round(1000.0*v*dv2)/1000.0)/100.0;;
 		vx+=dvx;
 		vy+=dvy;
 		pocz.setvx(vx);
 		pocz.setvy(vy);
 		pion.setvx(vx);
 		pion.setvy(vy);
-
 	}
 	
 	public void flip(prostokat p, int k)//metoda przekręcająca prostokąt o dany kąt
@@ -247,9 +247,6 @@ public class prostokaty extends JPanel implements Runnable
 		int width = 850;
 		int center = width/2;
 		while(active) {
-			System.out.println("Pion" + pion.getX()+ " "+ pion.getY());
-			System.out.println("Pocz" + pocz.getX()+ " "+ pocz.getY());
-			System.out.println("");
 			if(pocz.getX()+pocz.getWidth()<center)//przemieszczanie lasera w prawo
 			{
 				pocz.setX(pocz.getX()+pocz.getvx());
@@ -268,14 +265,12 @@ public class prostokaty extends JPanel implements Runnable
 				{
 					flip(pion, -90);
 
-						pion.setvy(vy);
+					pion.setvy(vy);
 
 					
 					
 					pion.setY(height/2);
 					pion.setX(center);
-					System.out.println("y1 = "+pion.getY());
-					System.out.println("x1 = "+pocz.getX());
 					pion.setvx(0);
 					repaint();
 				}
@@ -292,7 +287,6 @@ public class prostokaty extends JPanel implements Runnable
 					pocz.setvx(-1);
 					pocz.setX(pocz.getX()+pocz.getvx());
 					repaint();
-					System.out.println("x2 = "+pocz.getX());
 				}
 				
 				if(pocz.getX()<=center && pocz.getvx()<0)//zmieniamy kierunek początkowego laser na pionowy i w dół
@@ -301,18 +295,11 @@ public class prostokaty extends JPanel implements Runnable
 					pocz.setvy(pocz.getvx());
 					pocz.setY(height/2-pocz.getHeight()-pocz.getvy());
 					pocz.setX(center);
-					System.out.println("x3 = "+pocz.getX());
-					
-					pocz.setvx(0);
-					pocz.setY(pocz.getY()-pocz.getvy());
-					repaint();
 
-					if(vx==vy && vx!=1)
-					{
-						pocz.setY(pion.getY());
-					}
+					pocz.setvx(0);
+
+					repaint();
 				}
-				
 				if(pocz.getY()+pocz.getHeight()-25<=height)//przemieszczamy początkowy laser w dół
 				{
 					pocz.setY(pocz.getY()+pocz.getvy());
@@ -337,38 +324,33 @@ public class prostokaty extends JPanel implements Runnable
 					pion.setvy(-1);
 					pion.setY(pion.getY()-pion.getvy());
 					repaint();
-					System.out.println("y2 = "+pion.getY());
 				}
 				if(pion.getY()+pion.getHeight() == 250){
-					System.out.println("y3 = "+(pion.getY()+pion.getHeight()));
 				}
 				
 				if(pion.getY()+pion.getHeight()-25-pion.getvy()/2>=height)//zatrzymanie lasera na dolnej krawędzi
 				{
 					pion.setvy(0);
-				//	System.out.println("Delta = " + delta);
 				}
 			}
 
-		//	System.out.println("Aktywne");
 
 
-			if(pion.getY()+pion.getHeight() - 25 > 499  && pocz.getY()+pocz.getHeight() - 25 != 500){
+			if(pion.getY()+pion.getHeight() - 25 > 499  && pocz.getY()+pocz.getHeight() - 25 != 500 && pion.getY() != pocz.getY()){
 				delta++;
-				System.out.println("Delta = " + delta);
+				System.out.println("jeden " + delta);
 			}
 
 			if(pion.getY()+pion.getHeight()-25 > 499  && pocz.getY()+pocz.getHeight() - 25 > 499)//ustawiamy animacje na nieaktywną
 			{
-				System.out.println("Nieaktywne");
 				active = false;
-
 			}
 
-			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 > 499){
+			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 > 499 && pion.getY() != pocz.getY()){
 				delta++;
-				System.out.println("Delta = " + delta);
 			}
+			if(dv1==dv2)
+				delta = 0;
 
 
 			try {
