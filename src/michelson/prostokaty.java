@@ -9,11 +9,12 @@ public class prostokaty extends JPanel implements Runnable
 
 	static int delta;
 	prostokat pocz, pion;//nie zmieniać!
-	boolean active = true;
+	boolean active = true, czy_pierwszy = true, czy_drugi = true;
 	double vx = 1;//tego też nie
 	double vy = 1;//ani tego
 	Color k_pocz, k_pion;
 	double dvx, dvy, dv1, dv2;
+
 	
 	
 	
@@ -246,6 +247,8 @@ public class prostokaty extends JPanel implements Runnable
 		int height = 500;
 		int width = 850;
 		int center = width/2;
+		czy_pierwszy = true;
+		czy_drugi = true;
 		while(active) {
 			if(pocz.getX()+pocz.getWidth()<center)//przemieszczanie lasera w prawo
 			{
@@ -336,9 +339,11 @@ public class prostokaty extends JPanel implements Runnable
 
 
 
-			if(pion.getY()+pion.getHeight() - 25 > 499  && pocz.getY()+pocz.getHeight() - 25 != 500 && pion.getY() != pocz.getY()){
+			if(pion.getY()+pion.getHeight() - 25 > 499  && pocz.getY()+pocz.getHeight() - 25 != 500 && Math.round(pion.getY()) != Math.round(pocz.getY())
+					&& czy_pierwszy){
 				delta++;
-				System.out.println("jeden " + delta);
+				System.out.println("Jeden " + delta);
+				czy_drugi = false;
 			}
 
 			if(pion.getY()+pion.getHeight()-25 > 499  && pocz.getY()+pocz.getHeight() - 25 > 499)//ustawiamy animacje na nieaktywną
@@ -346,8 +351,11 @@ public class prostokaty extends JPanel implements Runnable
 				active = false;
 			}
 
-			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 > 499 && pion.getY() != pocz.getY()){
+			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 > 499 && Math.round(pion.getY()) != Math.round(pocz.getY())
+					&& czy_drugi){
 				delta++;
+				System.out.println("Dwa " + delta);
+				czy_pierwszy = false;
 			}
 			if(dv1==dv2)
 				delta = 0;
