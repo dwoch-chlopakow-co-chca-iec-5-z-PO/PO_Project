@@ -134,12 +134,12 @@ public class prostokaty extends JPanel implements Runnable
 		pion = new prostokat();
 		
 		pocz.setX(0);
-		pocz.setY(250);
+		pocz.setY(this.getHeight()/2);
 		pocz.setWidth(40);
 		pocz.setHeight(10);
 		
 		pion.setX(0);
-		pion.setY(250);
+		pion.setY(this.getHeight()/2);
 		pion.setWidth(40);
 		pion.setHeight(10);
 		
@@ -228,13 +228,13 @@ public class prostokaty extends JPanel implements Runnable
 		pion.paint(g);
 		
 		g.setColor(Color.blue);
-		g.fillRect(0, getSize().height/2-17, 80, 20);//emiter
+		g.fillRect(0, getSize().height/2-5, 80, 20);//emiter
 		
 		g.setColor(new Color(179, 204, 255));
 		g.fillRect(getSize().width/2-35, 0, 80, 10);//lustro na górze
-		g.fillRect(getSize().width/2+getSize().height/2-20, getSize().height/2-50, 20, 80);//lustro z prawej
+		g.fillRect(getSize().width/2+getSize().height/2, getSize().height/2-50, 20, 80);//lustro z prawej
 		g.setColor(new Color(0, 204, 0));
-		g.fillRect(getSize().width/2+1, getSize().height-20, 21, 40);//odbiornik
+		g.fillRect(getSize().width/2-5, getSize().height-20, 20, 40);//odbiornik
 		
 		
 		g.setColor(new Color(230, 238, 255));//zwierciadło półprzepuszczalne
@@ -248,7 +248,7 @@ public class prostokaty extends JPanel implements Runnable
 		int height = 500;
 		int width = 850;
 		int center = width/2;
-		while(pion.getX() != 850) {
+		while(pion.getY()+pion.getHeight()-25 <= 499  || pocz.getY()+pocz.getHeight() - 25 <= 499) {
 		if(active)
 		{
 			if(pocz.getX()+pocz.getWidth()<center)//przemieszczanie lasera w prawo
@@ -369,7 +369,7 @@ public class prostokaty extends JPanel implements Runnable
 
 		}
 			try {
-			Thread.sleep(18);
+			Thread.sleep(6);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

@@ -84,7 +84,7 @@ public class KlasaGlowna extends JFrame {
 		
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setResizable(false);
+	//	this.setResizable(false);
 		
 		//slidery
 		predkosc = new JSlider(JSlider.HORIZONTAL, predkosc_min, predkosc_max, predkosc_init);//do dodania listener
@@ -165,8 +165,7 @@ public class KlasaGlowna extends JFrame {
 		animacja.setActive(false);
 		
 		
-		exec.execute(animacja);
-		exec.shutdown();
+
 		//koniec panelu z animacją lasera
 		
 		
@@ -365,38 +364,41 @@ public class KlasaGlowna extends JFrame {
 		start.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				exec.execute(animacja);
 			
-			animacja.modV(obrot.getValue(), predkosc.getValue());
-			animacja.reset();
-			animacja.setActive(true);
-			obrot.setEnabled(false);
-			predkosc.setEnabled(false);
-			prawy_eter.setEnabled(false);
-			delta_t.setText("");
+				animacja.modV(obrot.getValue(), predkosc.getValue());
+				animacja.reset();
+				animacja.setActive(true);
+				obrot.setEnabled(false);
+				predkosc.setEnabled(false);
+				prawy_eter.setEnabled(false);
+				start.setEnabled(false);
+				delta_t.setText("");
 
 
-			delta_t.setFont(new Font("Arial", Font.PLAIN, 20));
+				delta_t.setFont(new Font("Arial", Font.PLAIN, 20));
 
-			Timer timer = new Timer(true);
+				Timer timer = new Timer(true);
 
 
-	        timer.schedule(new TimerTask() {
-	            @Override
-	            public void run() {
-	                SwingUtilities.invokeLater(new Runnable() {
-	                    @Override
-	                    public void run() {
-	                    	obrot.setEnabled(true);
-	        				predkosc.setEnabled(true);
-	        				prawy_eter.setEnabled(true);
-	        				animacja.setv(1);
-							delta_t.setText("\u0394 t = " + prostokaty.getDelta()+" ms");
-							dolny.revalidate();
-							dolny.repaint();
-	                    }
-	                    });
-	                }}, 9000);
-			}
+				timer.schedule(new TimerTask() {
+					@Override
+					public void run() {
+						SwingUtilities.invokeLater(new Runnable() {
+							@Override
+							public void run() {
+								obrot.setEnabled(true);
+								predkosc.setEnabled(true);
+								prawy_eter.setEnabled(true);
+								start.setEnabled(true);
+								animacja.setv(1);
+								delta_t.setText("\u0394 t = " + prostokaty.getDelta()+" ms");
+								dolny.revalidate();
+								dolny.repaint();
+							}
+							});
+						}}, 9000);
+				}
 		});
 		
 		//JPanel na_start = new JPanel(new GridLayout(6, 1)); 
