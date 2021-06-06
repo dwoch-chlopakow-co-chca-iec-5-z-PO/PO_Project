@@ -2,8 +2,6 @@ package michelson;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-
 import javax.swing.JPanel;
 
 public class prostokaty extends JPanel implements Runnable
@@ -248,9 +246,10 @@ public class prostokaty extends JPanel implements Runnable
 		int height = 500;
 		int width = 850;
 		int center = width/2;
-		while(pion.getY()+pion.getHeight()-25 <= 499  || pocz.getY()+pocz.getHeight() - 25 <= 499) {
-		if(active)
-		{
+		while(active) {
+			System.out.println("Pion" + pion.getX()+ " "+ pion.getY());
+			System.out.println("Pocz" + pocz.getX()+ " "+ pocz.getY());
+			System.out.println("");
 			if(pocz.getX()+pocz.getWidth()<center)//przemieszczanie lasera w prawo
 			{
 				pocz.setX(pocz.getX()+pocz.getvx());
@@ -274,7 +273,7 @@ public class prostokaty extends JPanel implements Runnable
 					
 					
 					pion.setY(height/2);
-					pion.setX(center-1);
+					pion.setX(center);
 					System.out.println("y1 = "+pion.getY());
 					System.out.println("x1 = "+pocz.getX());
 					pion.setvx(0);
@@ -296,35 +295,37 @@ public class prostokaty extends JPanel implements Runnable
 					System.out.println("x2 = "+pocz.getX());
 				}
 				
-				if(pocz.getX()<center && pocz.getvx()<0)//zmieniamy kierunek początkowego laser na pionowy i w dół
+				if(pocz.getX()<=center && pocz.getvx()<0)//zmieniamy kierunek początkowego laser na pionowy i w dół
 				{
 					flip(pocz, -90);
 					pocz.setvy(pocz.getvx());
 					pocz.setY(height/2-pocz.getHeight()-pocz.getvy());
-					pocz.setX(center-1);
+					pocz.setX(center);
+					System.out.println("x3 = "+pocz.getX());
 					
 					pocz.setvx(0);
 					pocz.setY(pocz.getY()-pocz.getvy());
 					repaint();
-					
+
 					if(vx==vy && vx!=1)
 					{
 						pocz.setY(pion.getY());
 					}
 				}
 				
-				if(pocz.getY()+pocz.getHeight()-25<height)//przemieszczamy początkowy laser w dół
+				if(pocz.getY()+pocz.getHeight()-25<=height)//przemieszczamy początkowy laser w dół
 				{
 					pocz.setY(pocz.getY()+pocz.getvy());
 					repaint();
 				}
+
 				
 				if(pocz.getY()>=height)//zatrzymanie początkowego lasera
 				{
 					pocz.setvy(0);
 				}
 				
-				if(pion.getY()>0)//przemieszczanie pionowego lasera do góry
+				if(pion.getY()>=0)//przemieszczanie pionowego lasera do góry
 				{
 					pion.setY(pion.getY()-pion.getvy());
 					repaint();
@@ -337,6 +338,9 @@ public class prostokaty extends JPanel implements Runnable
 					pion.setY(pion.getY()-pion.getvy());
 					repaint();
 					System.out.println("y2 = "+pion.getY());
+				}
+				if(pion.getY()+pion.getHeight() == 250){
+					System.out.println("y3 = "+(pion.getY()+pion.getHeight()));
 				}
 				
 				if(pion.getY()+pion.getHeight()-25-pion.getvy()/2>=height)//zatrzymanie lasera na dolnej krawędzi
@@ -354,11 +358,6 @@ public class prostokaty extends JPanel implements Runnable
 				System.out.println("Delta = " + delta);
 			}
 
-			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 > 499){
-				delta++;
-				System.out.println("Delta = " + delta);
-			}
-
 			if(pion.getY()+pion.getHeight()-25 > 499  && pocz.getY()+pocz.getHeight() - 25 > 499)//ustawiamy animacje na nieaktywną
 			{
 				System.out.println("Nieaktywne");
@@ -366,8 +365,12 @@ public class prostokaty extends JPanel implements Runnable
 
 			}
 
+			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 > 499){
+				delta++;
+				System.out.println("Delta = " + delta);
+			}
 
-		}
+
 			try {
 			Thread.sleep(6);
 		} catch (InterruptedException e) {

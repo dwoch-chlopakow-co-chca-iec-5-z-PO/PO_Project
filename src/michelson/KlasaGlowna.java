@@ -397,7 +397,7 @@ public class KlasaGlowna extends JFrame {
 								dolny.repaint();
 							}
 							});
-						}}, 9000);
+						}}, 10000);
 				}
 		});
 		
