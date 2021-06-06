@@ -233,7 +233,6 @@ public class prostokaty extends JPanel implements Runnable
 		g.setColor(new Color(179, 204, 255));
 		g.fillRect(getSize().width/2-35, 0, 80, 10);//lustro na górze
 		g.fillRect(getSize().width/2+getSize().height/2-20, getSize().height/2-50, 20, 80);//lustro z prawej
-		
 		g.setColor(new Color(0, 204, 0));
 		g.fillRect(getSize().width/2+1, getSize().height-20, 21, 40);//odbiornik
 		
@@ -264,19 +263,14 @@ public class prostokaty extends JPanel implements Runnable
 				repaint();
 			}
 			
-			if(pocz.getX()+pocz.getWidth()>=center)//aktywacja po przekroczeniu środka przez laser początkowy
+			if(pocz.getX()+pocz.getWidth() >= center)//aktywacja po przekroczeniu środka przez laser początkowy
 			{
 				if(pion.getX()+pion.getWidth()>=center && pion.getvx()!=0)//zmiana kierunku lasera pion na pionowy
 				{
 					flip(pion, -90);
-					if(vy<vx)
-					{
-						pion.setvy(1);
-					}
-					else
-					{
+
 						pion.setvy(vy);
-					}
+
 					
 					
 					pion.setY(height/2);
@@ -287,13 +281,13 @@ public class prostokaty extends JPanel implements Runnable
 					repaint();
 				}
 				
-				if(pocz.getX()<630)//przemieszczamy laser początkowy do kontaktu z prawym lustrem
+				if(pocz.getX()<635)//przemieszczamy laser początkowy do kontaktu z prawym lustrem
 				{
 					pocz.setX(pocz.getX()+pocz.getvx());
 					repaint();
 				}	
 				
-				if(pocz.getX()>=630)//odbijamy początkowy laser od lustra
+				if(pocz.getX()>=635)//odbijamy początkowy laser od lustra
 				{
 					odbij(pocz);
 					pocz.setvx(-1);
@@ -313,7 +307,7 @@ public class prostokaty extends JPanel implements Runnable
 					pocz.setY(pocz.getY()-pocz.getvy());
 					repaint();
 					
-					if(vx==vy&&vx!=5)
+					if(vx==vy && vx!=1)
 					{
 						pocz.setY(pion.getY());
 					}
@@ -355,12 +349,14 @@ public class prostokaty extends JPanel implements Runnable
 		//	System.out.println("Aktywne");
 
 
-			if(pion.getY()+pion.getHeight() - 25 >= 500  && pocz.getY()+pocz.getHeight() - 25 != 500){
+			if(pion.getY()+pion.getHeight() - 25 > 499  && pocz.getY()+pocz.getHeight() - 25 != 500){
 				delta++;
+				System.out.println("Delta = " + delta);
 			}
 
-			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 >= 500){
+			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 > 499){
 				delta++;
+				System.out.println("Delta = " + delta);
 			}
 
 			if(pion.getY()+pion.getHeight()-25 > 499  && pocz.getY()+pocz.getHeight() - 25 > 499)//ustawiamy animacje na nieaktywną
@@ -373,7 +369,7 @@ public class prostokaty extends JPanel implements Runnable
 
 		}
 			try {
-			Thread.sleep(6);
+			Thread.sleep(18);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

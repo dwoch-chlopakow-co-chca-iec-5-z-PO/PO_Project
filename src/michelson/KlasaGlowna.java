@@ -390,12 +390,12 @@ public class KlasaGlowna extends JFrame {
 	        				predkosc.setEnabled(true);
 	        				prawy_eter.setEnabled(true);
 	        				animacja.setv(1);
-							delta_t.setText("\u0394 t = " + prostokaty.getDelta()*6+" ms");
+							delta_t.setText("\u0394 t = " + prostokaty.getDelta()+" ms");
 							dolny.revalidate();
 							dolny.repaint();
 	                    }
 	                    });
-	                }}, 8000 );
+	                }}, 9000);
 			}
 		});
 		
