@@ -413,15 +413,23 @@ public class KlasaGlowna extends JFrame {
 		na_start.setBorder(BorderFactory.createLineBorder(Color.black, 1));//ustawienia borderów
 		na_start.add(start);
 		
-
+		JPanel napisy = new JPanel();
+		napisy.setLayout(new GridLayout(2, 1));
 		JPanel t = new JPanel(new GridBagLayout());//GridbagLayout żeby wycentrować JLabel
-
-		t.add(velo);
-		t.add(deg);
+		JPanel vd = new JPanel();
+		
+		napisy.add(velo);
+		napisy.add(deg);
+		vd.add(velo);
+		vd.add(deg);
+		
+		napisy.add(vd);
+		
+		vd.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
 		t.add(delta_t);
 		t.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-
+		napisy.add(t);
 		
 		JPanel slidery = new JPanel();
 		slidery.setLayout(new GridLayout(4, 1));
@@ -458,7 +466,7 @@ public class KlasaGlowna extends JFrame {
 
 		
 		dolny.add(na_start);
-		dolny.add(t);
+		dolny.add(napisy);
 		dolny.add(slidery);		
 		
 		
