@@ -72,6 +72,12 @@ public class prostokaty extends JPanel implements Runnable
 		pocz = new prostokat();
 		pion = new prostokat();
 		
+		int r = k.getRed();
+		int g = k.getGreen();
+		int b = k.getBlue();
+		
+		Color k1 = new Color(r, g, b, 127);
+		
 		pocz.setX(0);
 		pocz.setY(250);
 		pocz.setWidth(40);
@@ -83,11 +89,11 @@ public class prostokaty extends JPanel implements Runnable
 		pion.setHeight(10);
 		
 		
-		pocz.setColor(k);
-		pion.setColor(k);
+		pocz.setColor(k1);
+		pion.setColor(k1);
 		repaint();
-		this.k_pocz = k;
-		this.k_pion = k;
+		this.k_pocz = k1;
+		this.k_pion = k1;
 	}
 
 	public void reset()
@@ -227,13 +233,13 @@ public class prostokaty extends JPanel implements Runnable
 		pion.paint(g);
 		
 		g.setColor(Color.blue);
-		g.fillRect(0, getSize().height/2-5, 80, 20);//emiter
+		g.fillRect(0, getSize().height/2-17, 80, 20);//emiter
 		
 		g.setColor(new Color(179, 204, 255));
 		g.fillRect(getSize().width/2-35, 0, 80, 10);//lustro na górze
-		g.fillRect(getSize().width/2+getSize().height/2, getSize().height/2-50, 20, 80);//lustro z prawej
+		g.fillRect(getSize().width/2+getSize().height/2-10, getSize().height/2-50, 20, 80);//lustro z prawej
 		g.setColor(new Color(0, 204, 0));
-		g.fillRect(getSize().width/2-5, getSize().height-20, 20, 40);//odbiornik
+		g.fillRect(getSize().width/2+2, getSize().height-20, 21, 40);//odbiornik
 		
 		
 		g.setColor(new Color(230, 238, 255));//zwierciadło półprzepuszczalne

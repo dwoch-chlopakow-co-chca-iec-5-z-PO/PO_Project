@@ -412,14 +412,14 @@ public class KlasaGlowna extends JFrame {
 		JPanel na_start = new JPanel(new GridBagLayout()); //decyzja czy lepszy griLayout czy gridbag
 		na_start.setBorder(BorderFactory.createLineBorder(Color.black, 1));//ustawienia borderów
 		na_start.add(start);
-		na_start.add(delta_t);
+		
 
 		JPanel t = new JPanel(new GridBagLayout());//GridbagLayout żeby wycentrować JLabel
 
 		t.add(velo);
 		t.add(deg);
 
-
+		t.add(delta_t);
 		t.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
 		
