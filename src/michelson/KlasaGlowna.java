@@ -33,8 +33,6 @@ public class KlasaGlowna extends JFrame {
 	
 	JMenuBar pasek_menu;
 	JMenu menu;
-	JMenu grubosc_menu;
-	JMenuItem dzialanie;
 	JMenuItem dane;
 	
 	
@@ -95,7 +93,7 @@ public class KlasaGlowna extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				duzy.setyV(predkosc.getValue());
-				deg.setText("Prędkość: "+((double)predkosc.getValue()/100.0));
+				velo.setText(messages.getString("Speed") + ": " + (double)predkosc.getValue() + "%");
 				repaint();
 				
 			}
@@ -110,9 +108,8 @@ public class KlasaGlowna extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				duzy.setk(obrot.getValue());
-				deg.setText("Kąt: "+obrot.getValue());
+				deg.setText(messages.getString("Deg") + ": " + obrot.getValue()+"\u00B0");
 				repaint();
-
 			}
 			
 		});
@@ -127,8 +124,7 @@ public class KlasaGlowna extends JFrame {
 				pasek_menu.add(menu);
 				
 				dane = new JMenuItem(messages.getString("Menu_item1"));
-				dzialanie = new JMenuItem(messages.getString("Menu_item2"));
-			
+
 				
 			
 				
@@ -143,23 +139,6 @@ public class KlasaGlowna extends JFrame {
 				}
 				);
 				menu.add(dane);
-				
-				
-				dzialanie.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent arg0) {		
-					
-						
-						
-						ObrazekRamka ramka = new ObrazekRamka();
-						ramka.setVisible(true);
-					}
-				}
-				);
-				
-				menu.add(dzialanie);
-				
-				
 
 				//Koniec menu
 		
@@ -250,8 +229,9 @@ public class KlasaGlowna extends JFrame {
 				tytul1.setText(messages.getString("Slider1"));
 				tytul2.setText(messages.getString("Slider2"));
 				menu.setText(messages.getString("Menu"));
-				dzialanie.setText(messages.getString("Menu_item2"));
 				dane.setText(messages.getString("Menu_item1"));
+				velo.setText(messages.getString("Speed") + ": " + (double)predkosc.getValue() + "%");
+				deg.setText(messages.getString("Deg") + ": " +obrot.getValue()+"\u00B0");
 				}
 		}
 		);
@@ -310,7 +290,8 @@ public class KlasaGlowna extends JFrame {
 					animacja.reset();
 					animacja.setActive(false);
 					predkosc.setValue(1);
-					revalidate();
+					velo.setText(messages.getString("Speed") + ": " + (double)predkosc.getValue() + "%");
+					deg.setText(messages.getString("Deg") + ": " +obrot.getValue()+"\u00B0");
 				}
 				else
 				{
@@ -325,8 +306,10 @@ public class KlasaGlowna extends JFrame {
 					obrot.setValue(0);
 					animacja.reset();
 					animacja.setActive(false);
-					revalidate();
+					velo.setVisible(false);
+					deg.setVisible(false);
 				}
+				revalidate();
 			}
 		}
 		);
@@ -408,38 +391,42 @@ public class KlasaGlowna extends JFrame {
 				}
 		});
 		
-		//JPanel na_start = new JPanel(new GridLayout(6, 1)); 
-		JPanel na_start = new JPanel(new GridBagLayout()); //decyzja czy lepszy griLayout czy gridbag
-		na_start.setBorder(BorderFactory.createLineBorder(Color.black, 1));//ustawienia borderów
+		JPanel na_start = new JPanel(new GridBagLayout());
+		na_start.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 		na_start.add(start);
-		
-		JPanel napisy = new JPanel();
-		napisy.setLayout(new GridLayout(2, 1));
-		JPanel t = new JPanel(new GridBagLayout());//GridbagLayout żeby wycentrować JLabel
-		JPanel vd = new JPanel();
-		
-		napisy.add(velo);
-		napisy.add(deg);
-		vd.add(velo);
-		vd.add(deg);
-		
-		napisy.add(vd);
-		
-		vd.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-		t.add(delta_t);
-		t.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-		napisy.add(t);
+		velo.setFont(new Font("Arial", Font.PLAIN, 20));
+		deg.setFont(new Font("Arial", Font.PLAIN, 20));
+
+		
+		JPanel napisy = new JPanel(new GridLayout(3,1));
+		JPanel podnapisy1 = new JPanel();
+		JPanel podnapisy2 = new JPanel();
+		JPanel podnapisy3 = new JPanel();
+
+		podnapisy3.add(delta_t);
+		napisy.add(podnapisy3);
+
+		podnapisy1.add(velo);
+		podnapisy2.add(deg);
+		napisy.add(podnapisy1);
+		napisy.add(podnapisy2);
+		
+
+
 		
 		JPanel slidery = new JPanel();
 		slidery.setLayout(new GridLayout(4, 1));
 		slidery.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-	
-		
-		
-		
-		
-		
+		podnapisy1.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+		podnapisy2.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+		podnapisy3.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+
+
+
+
+
+
 		tytul1 = new JLabel(messages.getString("Slider1"));
 		tytul2 = new JLabel(messages.getString("Slider2"));
 		

@@ -348,7 +348,6 @@ public class prostokaty extends JPanel implements Runnable
 			if(pion.getY()+pion.getHeight() - 25 > 499  && pocz.getY()+pocz.getHeight() - 25 != 500 && Math.round(pion.getY()) != Math.round(pocz.getY())
 					&& czy_pierwszy){
 				delta++;
-				System.out.println("Jeden " + delta);
 				czy_drugi = false;
 			}
 
@@ -360,7 +359,6 @@ public class prostokaty extends JPanel implements Runnable
 			if(pion.getY()+pion.getHeight() - 25 != 500  && pocz.getY()+pocz.getHeight() - 25 > 499 && Math.round(pion.getY()) != Math.round(pocz.getY())
 					&& czy_drugi){
 				delta++;
-				System.out.println("Dwa " + delta);
 				czy_pierwszy = false;
 			}
 			if(dv1==dv2)
