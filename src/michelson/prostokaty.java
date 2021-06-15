@@ -150,7 +150,7 @@ public class prostokaty extends JPanel implements Runnable
 		dv2 = Math.round(1000.0*Math.cos(Math.toRadians(k)))/1000.0;
 
 		dvx+=(Math.round(1000.0*v*dv1)/1000.0)/100.0;
-		dvy+=(Math.round(1000.0*v*dv2)/1000.0)/100.0;;
+		dvy+=(Math.round(1000.0*v*dv2)/1000.0)/100.0;
 		vx+=dvx;
 		vy+=dvy;
 		pocz.setvx(vx);
@@ -334,9 +334,6 @@ public class prostokaty extends JPanel implements Runnable
 					pion.setY(pion.getY()-pion.getvy());
 					repaint();
 				}
-				if(pion.getY()+pion.getHeight() == 250){
-				}
-				
 				if(pion.getY()+pion.getHeight()-25-pion.getvy()/2>=height)//zatrzymanie lasera na dolnej krawędzi
 				{
 					pion.setvy(0);

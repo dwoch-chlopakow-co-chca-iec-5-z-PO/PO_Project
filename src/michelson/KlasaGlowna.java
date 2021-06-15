@@ -471,7 +471,8 @@ public class KlasaGlowna extends JFrame {
 	            public void run() {
 	        		frame.setVisible(true);
 	        		frame.setSize(1080,760);
-	        		frame.setMinimumSize(new Dimension(960,600));		
+	        		frame.setMinimumSize(new Dimension(960,600));
+	        		frame.setResizable(false);
 	            }
 		 });
 		 
